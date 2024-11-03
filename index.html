@@ -286,6 +286,31 @@
       color: var(--text-color);
     }
 
+    /* Section Interviews */
+    .interviews-section {
+      padding: 50px 0;
+      background-color: #e0e7ff;
+      text-align: center;
+    }
+
+    .interviews-section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--highlight-color);
+    }
+
+    .video-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    video, iframe {
+      width: 80%;
+      max-width: 800px;
+      height: auto;
+    }
+
     /* Carrousel des projets */
     .carousel-section {
       padding: 100px 20px;
@@ -375,6 +400,7 @@
   <nav class="navbar">
     <a href="#hero">Accueil</a>
     <a href="#about">À propos</a>
+    <a href="#interviews">Interviews</a>
     <a href="#projects">Projets</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -401,20 +427,23 @@
     </div>
   </section>
 
-  <!-- Bande d'infos avec logos interactifs -->
-  <section class="logo-section fade-in-scroll">
-    <a href="https://www.linkedin.com/in/amine-foufa-056a51210/" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
-    </a>
-    <a href="https://github.com/AmineF349" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo">
-    </a>
-  </section>
+  <!-- Section Interviews -->
+  <section class="interviews-section fade-in-scroll" id="interviews">
+    <h2>Interviews</h2>
+    <p class="container">Découvrez les interviews récentes sur divers sujets intéressants.</p>
 
-  <!-- Section about -->
-  <section class="about-section fade-in-scroll">
-    <h2>À propos de moi</h2>
-    <p>Je suis actuellement en première année à l'ENSEEIHT dans la filière Sciences du Numérique. Passionné par le développement numérique et les technologies avancées, je cherche à acquérir des compétences en ingénierie et en sciences du numérique pour contribuer à des projets innovants.</p>
+    <div class="video-container">
+      <!-- Espace réservé pour une vidéo locale -->
+      <video controls>
+        <source src="assets/videos/interview.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la lecture de vidéos.
+      </video>
+
+      <!-- OU intégrer une vidéo depuis YouTube ou Vimeo en utilisant un iframe -->
+      <!--
+      <iframe src="https://www.youtube.com/embed/ID_DE_LA_VIDEO" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      -->
+    </div>
   </section>
 
   <!-- Carrousel de projets -->
