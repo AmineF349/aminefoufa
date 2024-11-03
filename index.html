@@ -195,6 +195,7 @@
       transform: translate(-50%, -50%) scale(1.1);
     }
 
+    /* Animation et texte dans les bulles */
     .info-block {
       position: absolute;
       width: 100px;
@@ -208,14 +209,38 @@
       text-align: center;
       font-size: 0.9em;
       transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+      overflow: hidden;
+      padding: 10px;
     }
 
     .info-block:hover {
       transform: translateY(-10px);
-      width: 180px;
-      height: 180px;
+      width: 200px;
+      height: 200px;
       border-radius: 20px;
       background-color: var(--hover-color);
+    }
+
+    .info-block span {
+      transition: opacity 0.3s ease;
+    }
+
+    .info-block p {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-size: 0.9em;
+      margin: 0;
+      text-align: center;
+    }
+
+    .info-block:hover span {
+      opacity: 0;
+    }
+
+    .info-block:hover p {
+      display: block;
+      opacity: 1;
     }
 
     /* Position des blocs circulaires */
@@ -410,7 +435,7 @@
     <h1>Abderahmène Foufa</h1>
     <p>Étudiant Ingénieur à l'ENSEEIHT</p>
     <div class="enseeiht-logo">
-      <img src="/mnt/data/téléchargement (1).png" alt="Logo ENSEEIHT">
+      <img src="assets/Images_site/N7.jpg" alt="Logo ENSEEIHT">
     </div>
   </section>
 
@@ -418,12 +443,25 @@
   <section class="circle-section" id="about">
     <div class="circle-container fade-in-scroll">
       <div class="circle-photo">
-        <img src="assets/images/mypicture_bis.jpg" alt="Abderahmène Foufa">
+        <img src="assets/Images_site/Moi.jpg" alt="Abderahmène Foufa">
       </div>
-      <div class="info-block block-1">Étudiant Ingénieur</div>
-      <div class="info-block block-2">Sciences du Numérique</div>
-      <div class="info-block block-3">Projets</div>
-      <div class="info-block block-4">Contact</div>
+      <!-- Blocs circulaires autour de la photo avec texte statique et contenu supplémentaire au survol -->
+      <div class="info-block block-1">
+        <span>Étudiant Ingénieur</span>
+        <p>Étudiant Ingénieur à l'ENSEEIHT, passionné par la science numérique et les nouvelles technologies.</p>
+      </div>
+      <div class="info-block block-2">
+        <span>Sciences du Numérique</span>
+        <p>Sciences du Numérique : exploration des algorithmes, de la data science, et de l'IA.</p>
+      </div>
+      <div class="info-block block-3">
+        <span>Projets</span>
+        <p>Projets : développement de solutions innovantes pour améliorer la productivité et la collaboration.</p>
+      </div>
+      <div class="info-block block-4">
+        <span>Contact</span>
+        <p>Mail : foufa.amine.30@gmail.com<br>Tél : 0621587666</p>
+      </div>
     </div>
   </section>
 
