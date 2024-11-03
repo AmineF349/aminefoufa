@@ -1,0 +1,467 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <title>Abderahmène Foufa - Étudiant Ingénieur à l'ENSEEIHT</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Abderahmène Foufa, étudiant en 1ère année dans la filière Sciences du Numérique à l'ENSEEIHT, avec un intérêt marqué pour les technologies et le développement numérique." />
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap" rel="stylesheet" />
+  <style>
+    /* Palette de couleurs sobres et modernes */
+    :root {
+      --bg-color: #0d0d0d;
+      --text-color: #e5e5e5;
+      --highlight-color: #3498db;
+      --accent-color: #ff4081;
+      --block-bg-color: #1c1c1c;
+      --hover-color: rgba(255, 255, 255, 0.1);
+      --progress-bar-color: #3498db;
+      --transition-duration: 0.5s;
+      --hero-bg-overlay: rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      color: var(--text-color);
+    }
+
+    p {
+      color: var(--text-color);
+      font-weight: 400;
+      line-height: 1.8;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--highlight-color);
+      transition: color var(--transition-duration);
+    }
+
+    a:hover {
+      color: var(--accent-color);
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 5px;
+      background-color: var(--progress-bar-color);
+      z-index: 100;
+    }
+
+    /* Sticky navigation */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      background-color: var(--block-bg-color);
+      opacity: 0.95;
+    }
+
+    .navbar a {
+      color: var(--text-color);
+      font-size: 1.2rem;
+      margin-right: 20px;
+      text-transform: uppercase;
+    }
+
+    /* Section d'intro avec image de fond */
+    .intro-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background: url('/mnt/data/1601401980576.jpeg') no-repeat center center/cover;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      color: var(--text-color);
+    }
+
+    .intro-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--hero-bg-overlay);
+      z-index: 1;
+    }
+
+    .intro-section h1 {
+      font-size: 4rem;
+      text-align: center;
+      z-index: 3;
+      opacity: 0;
+      animation: fadeInText 2s ease-out forwards;
+    }
+
+    .intro-section p {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      z-index: 3;
+      opacity: 0;
+      animation: fadeInText 2s ease-out 1s forwards;
+    }
+
+    /* Logo ENSEEIHT */
+    .enseeiht-logo {
+      margin-top: 20px;
+      z-index: 3;
+    }
+
+    .enseeiht-logo img {
+      width: 100px;
+      height: auto;
+    }
+
+    /* Animation de texte au lancement */
+    @keyframes fadeInText {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section avec photo centrale et blocs circulaires autour */
+    .circle-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 100px 0;
+      background-color: var(--bg-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .circle-container {
+      position: relative;
+      width: 600px;
+      height: 600px;
+    }
+
+    .circle-photo {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: var(--block-bg-color);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .circle-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .circle-photo:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .info-block {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: var(--block-bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 0.9em;
+      transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+    }
+
+    .info-block:hover {
+      transform: translateY(-10px);
+      width: 180px;
+      height: 180px;
+      border-radius: 20px;
+      background-color: var(--hover-color);
+    }
+
+    /* Position des blocs circulaires */
+    .block-1 {
+      top: -50px;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    .block-2 {
+      top: 50%;
+      left: -50px;
+      transform: translate(0, -50%);
+    }
+
+    .block-3 {
+      bottom: -50px;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    .block-4 {
+      top: 50%;
+      right: -50px;
+      transform: translate(0, -50%);
+    }
+
+    /* Bande d'infos avec logos */
+    .logo-section {
+      padding: 50px 0;
+      background-color: var(--block-bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .logo-section img {
+      width: 50px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: grayscale(100%);
+    }
+
+    .logo-section img:hover {
+      transform: scale(1.1);
+      filter: grayscale(0);
+    }
+
+    /* Section about */
+    .about-section {
+      padding: 100px 20px;
+      background-color: var(--block-bg-color);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: var(--highlight-color);
+    }
+
+    .about-section p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--text-color);
+    }
+
+    /* Carrousel des projets */
+    .carousel-section {
+      padding: 100px 20px;
+      background-color: var(--block-bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: auto;
+      gap: 20px;
+    }
+
+    .carousel {
+      display: flex;
+      scroll-snap-type: x mandatory;
+      overflow-x: scroll;
+      padding: 20px;
+    }
+
+    .carousel-item {
+      min-width: 300px;
+      background-color: var(--block-bg-color);
+      padding: 30px;
+      border-radius: 20px;
+      color: var(--text-color);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      scroll-snap-align: center;
+    }
+
+    .carousel-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--block-bg-color);
+      color: var(--text-color);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .circle-container {
+        width: 400px;
+        height: 400px;
+      }
+
+      .circle-photo {
+        width: 150px;
+        height: 150px;
+      }
+
+      .info-block {
+        width: 80px;
+        height: 80px;
+      }
+
+      .info-block:hover {
+        width: 160px;
+        height: 160px;
+      }
+
+      .carousel-item {
+        min-width: 250px;
+      }
+
+      .logo-section img {
+        width: 40px;
+      }
+
+      .about-section h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Barre de progression -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Barre de navigation -->
+  <nav class="navbar">
+    <a href="#hero">Accueil</a>
+    <a href="#about">À propos</a>
+    <a href="#projects">Projets</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Section d'intro avec image de fond -->
+  <section class="intro-section" id="hero">
+    <h1>Abderahmène Foufa</h1>
+    <p>Étudiant Ingénieur à l'ENSEEIHT</p>
+    <div class="enseeiht-logo">
+      <img src="/mnt/data/téléchargement (1).png" alt="Logo ENSEEIHT">
+    </div>
+  </section>
+
+  <!-- Section avec photo centrale et blocs circulaires autour -->
+  <section class="circle-section" id="about">
+    <div class="circle-container fade-in-scroll">
+      <div class="circle-photo">
+        <img src="assets/images/mypicture_bis.jpg" alt="Abderahmène Foufa">
+      </div>
+      <div class="info-block block-1">Étudiant Ingénieur</div>
+      <div class="info-block block-2">Sciences du Numérique</div>
+      <div class="info-block block-3">Projets</div>
+      <div class="info-block block-4">Contact</div>
+    </div>
+  </section>
+
+  <!-- Bande d'infos avec logos interactifs -->
+  <section class="logo-section fade-in-scroll">
+    <a href="https://www.linkedin.com/in/amine-foufa-056a51210/" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
+    </a>
+    <a href="https://github.com/AmineF349" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo">
+    </a>
+  </section>
+
+  <!-- Section about -->
+  <section class="about-section fade-in-scroll">
+    <h2>À propos de moi</h2>
+    <p>Je suis actuellement en première année à l'ENSEEIHT dans la filière Sciences du Numérique. Passionné par le développement numérique et les technologies avancées, je cherche à acquérir des compétences en ingénierie et en sciences du numérique pour contribuer à des projets innovants.</p>
+  </section>
+
+  <!-- Carrousel de projets -->
+  <section class="carousel-section fade-in-scroll" id="projects">
+    <div class="carousel">
+      <div class="carousel-item">
+        <h3>Projet 1</h3>
+        <p>Description d'un projet réalisé durant mes études.</p>
+      </div>
+      <div class="carousel-item">
+        <h3>Projet 2</h3>
+        <p>Description d'un second projet.</p>
+      </div>
+      <div class="carousel-item">
+        <h3>Projet 3</h3>
+        <p>Description d'un autre projet en lien avec le numérique.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 Abderahmène Foufa | Designed by Abderahmène</p>
+  </footer>
+
+  <!-- Script pour les animations au scroll et la barre de progression -->
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+
+    document.querySelectorAll('.fade-in-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    window.onscroll = function () {
+      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrolled = (winScroll / height) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+    };
+  </script>
+
+</body>
+
+</html>
