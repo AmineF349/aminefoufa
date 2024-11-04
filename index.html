@@ -425,6 +425,32 @@
         font-size: 2rem;
       }
     }
+  /* Styles pour les nouvelles sections */
+  .section {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: var(--block-bg-color);
+  }
+  
+  .section h2 {
+    color: var(--highlight-color);
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .section p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Placeholder "Coming soon" */
+  .coming-soon {
+    font-size: 1.5rem;
+    color: var(--highlight-color);
+    opacity: 0.8;
+  }
   </style>
 </head>
 
@@ -438,7 +464,12 @@
     <a href="#hero">Accueil</a>
     <a href="#about">À propos</a>
     <a href="#interviews">Interviews</a>
-    <a href="#projects">Career Projects</a>
+    <a href="#engineering-course">Engineering Course</a>
+    <a href="#international-mobility">International Mobility</a>
+    <a href="#sustainability">Sustainability & Civic Engagement</a>
+    <a href="#sports-activities">Sport & Other Activities</a>
+    <a href="#career-development">Career Development</a>
+
   </nav>
 
   <!-- Section d'intro avec image de fond et effet parallax -->
@@ -504,6 +535,46 @@
       </video>
     </div>
   </section>
+<!-- Engineering Course Section -->
+  <section class="section" id="engineering-course">
+    <h2>Engineering Course</h2>
+    <p>In my engineering journey, I have engaged in various projects to develop my skills and contribute to practical innovations.</p>
+    <div class="carousel">
+      <div class="carousel-item">
+        <h3>Conception d'un Site Web pour Enertec France</h3>
+        <p>Création d'un site web complexe pour simplifier la gestion et l'utilisation de l'équipement solaire destiné à la vente.</p>
+      </div>
+      <div class="carousel-item">
+        <h3>Application de Stationnement Intelligent</h3>
+        <p>Développement d'une application permettant de connaître la disponibilité des places de stationnement dans les grandes villes.</p>
+      </div>
+      <div class="carousel-item">
+        <h3>Jeu pour Soutien Écologique et Humanitaire</h3>
+        <p>Participation à la création d'un jeu où le temps de jeu aide à soutenir des causes écologiques et humanitaires via un système de publicité intégré.</p>
+      </div>
+    </div>
+  </section>
+<!-- International Mobility Section -->
+  <section class="section" id="international-mobility">
+      <h2>International Mobility</h2>
+      <p>I aspire to further my studies internationally. My target universities include Georgia Tech for IT studies, KTH in Sweden, and the University of Granada in Spain, renowned for their innovative environments and focus on technology.</p>
+    </section>
+  <!-- Sustainability & Civic Engagement Section -->
+  <section class="section" id="sustainability">
+    <h2>Sustainability & Civic Engagement</h2>
+    <p class="coming-soon">Coming soon...</p>
+  </section>
+<!-- Sport & Other Activities Section -->
+  <section class="section" id="sports-activities">
+    <h2>Sport & Other Activities</h2>
+    <p>In my free time, I enjoy sports, particularly volleyball, and exploring new places. These activities keep me active, balanced, and motivated.</p>
+  </section>
+<!-- Career Development Section -->
+  <section class="section" id="career-development">
+    <h2>Career Development</h2>
+    <p class="coming-soon">Coming soon...</p>
+  </section>
+
 
   <!-- Carrousel de projets renommé en Career Projects -->
   <section class="carousel-section fade-in-scroll" id="projects">
