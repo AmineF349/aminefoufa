@@ -90,7 +90,7 @@
       text-transform: uppercase;
     }
 
-    /* Section d'intro avec image de fond */
+    /* Section d'intro avec image de fond et effet parallax */
     .intro-section {
       display: flex;
       justify-content: center;
@@ -98,6 +98,7 @@
       flex-direction: column;
       height: 100vh;
       background: url('assets/Images_site/fond.jpg') no-repeat center center/cover;
+      background-attachment: fixed;
       position: relative;
       overflow: hidden;
       z-index: 1;
@@ -282,13 +283,22 @@
 
     .logo-section img {
       width: 50px;
-      transition: transform 0.3s ease, filter 0.3s ease;
-      filter: grayscale(100%);
+      transition: transform 0.3s ease;
     }
 
     .logo-section img:hover {
       transform: scale(1.1);
-      filter: grayscale(0);
+    }
+
+    /* Style spécifique pour le logo GitHub pour une meilleure visibilité */
+    .github-logo {
+      filter: brightness(1.5); /* Augmente la luminosité */
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+
+    .github-logo:hover {
+      filter: brightness(2) saturate(1.5); /* Rend le logo encore plus lumineux et coloré au survol */
+      transform: scale(1.2); /* Légèrement plus grand au survol */
     }
 
     /* Section about */
@@ -431,7 +441,7 @@
     <a href="#projects">Career Projects</a>
   </nav>
 
-  <!-- Section d'intro avec image de fond -->
+  <!-- Section d'intro avec image de fond et effet parallax -->
   <section class="intro-section" id="hero">
     <h1>Abderahmène Foufa</h1>
     <p>Étudiant Ingénieur à l'ENSEEIHT</p>
@@ -468,11 +478,11 @@
 
   <!-- Bande d'infos avec logos interactifs -->
   <section class="logo-section fade-in-scroll">
-    <a href="https://www.linkedin.com/in/abderahm%C3%A8ne-foufa-056a51210/" target="_blank">
+    <a href="https://www.linkedin.com/in/amine-foufa-056a51210/" target="_blank">
       <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
     </a>
     <a href="https://github.com/AmineF349" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo" class="github-logo">
     </a>
     <a href="assets/Images_site/CV_FR.pdf" target="_blank">
       <img src="assets/Images_site/logoCVFR.webp" alt="CV en Français">
