@@ -1,660 +1,617 @@
-<!DOCTYPE HTML>
-<html lang="en">
-
+<!-- index.html -->
+<!doctype html>
+<html lang="fr">
 <head>
-  <title>Abderahmène Foufa - Étudiant Ingénieur à l'ENSEEIHT</title>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Abderahmène Foufa, étudiant en 1ère année dans la filière Sciences du Numérique à l'ENSEEIHT, avec un intérêt marqué pour les technologies et le développement numérique." />
-  <link href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap" rel="stylesheet" />
-   
-  <link rel="icon" href="assets/Images_site/logoAF.png" sizes="64x64" type="image/png" />
-  
-  <link href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap" rel="stylesheet" />
-  <style>
-    /* Palette de couleurs sobres et modernes */
-    :root {
-      --bg-color: #0d0d0d;
-      --text-color: #e5e5e5;
-      --highlight-color: #3498db;
-      --accent-color: #ff4081;
-      --block-bg-color: #1c1c1c;
-      --hover-color: rgba(255, 255, 255, 0.1);
-      --progress-bar-color: #3498db;
-      --transition-duration: 0.5s;
-      --hero-bg-overlay: rgba(0, 0, 0, 0.6);
-    }
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <title>Votre Nom — Data / ML / Finance</title>
+  <meta name="description" content="Portfolio sobre pour recruteurs : data science, machine learning, finance. Projets, études de cas, compétences et contact." />
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      line-height: 1.6;
-      scroll-behavior: smooth;
-    }
+  <!-- Open Graph -->
+  <meta property="og:title" content="Votre Nom — Data / ML / Finance" />
+  <meta property="og:description" content="Projets data/ML, modèles finance, automatisation et ingénierie logicielle." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/portrait.jpg" />
 
-    h1, h2, h3 {
-      font-weight: 700;
-      color: var(--text-color);
-    }
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
 
-    p {
-      color: var(--text-color);
-      font-weight: 400;
-      line-height: 1.8;
-    }
-
-    a {
-      text-decoration: none;
-      color: var(--highlight-color);
-      transition: color var(--transition-duration);
-    }
-
-    a:hover {
-      color: var(--accent-color);
-    }
-
-    /* Progress bar */
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 5px;
-      background-color: var(--progress-bar-color);
-      z-index: 100;
-    }
-
-    /* Sticky navigation */
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 99;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 50px;
-      background-color: var(--block-bg-color);
-      opacity: 0.95;
-    }
-
-    .navbar a {
-      color: var(--text-color);
-      font-size: 1.2rem;
-      margin-right: 20px;
-      text-transform: uppercase;
-    }
-
-    /* Section d'intro avec image de fond et effet parallax */
-    .intro-section {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      height: 100vh;
-      background: url('assets/Images_site/fond.jpg') no-repeat center center/cover;
-      background-attachment: fixed;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-      color: var(--text-color);
-    }
-
-    .intro-section::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--hero-bg-overlay);
-      z-index: 1;
-    }
-
-    .intro-section h1 {
-      font-size: 4rem;
-      text-align: center;
-      z-index: 3;
-      opacity: 0;
-      animation: fadeInText 2s ease-out forwards;
-    }
-
-    .intro-section p {
-      font-size: 1.5rem;
-      margin-top: 20px;
-      z-index: 3;
-      opacity: 0;
-      animation: fadeInText 2s ease-out 1s forwards;
-    }
-
-    /* Logo ENSEEIHT */
-    .enseeiht-logo {
-      margin-top: 20px;
-      z-index: 3;
-    }
-
-    .enseeiht-logo img {
-      width: 100px;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
-
-    /* Animation de texte au lancement */
-    @keyframes fadeInText {
-      0% {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Section avec photo centrale et blocs circulaires autour */
-    .circle-section {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 100px 0;
-      background-color: var(--bg-color);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .circle-container {
-      position: relative;
-      width: 600px;
-      height: 600px;
-    }
-
-    .circle-photo {
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: var(--block-bg-color);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
-    }
-
-    .circle-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .circle-photo:hover {
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-
-    /* Animation et texte dans les bulles */
-    .info-block {
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background-color: var(--block-bg-color);
-      color: var(--text-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-size: 0.9em;
-      transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
-      overflow: hidden;
-      padding: 10px;
-    }
-
-    .info-block:hover {
-      transform: scale(1.1) translateY(-10px); /* Augmente un peu plus la taille au survol */
-      width: 220px;
-      height: 220px;
-      border-radius: 20px;
-      background-color: var(--hover-color);
-    }
-
-    .info-block span {
-      transition: opacity 0.3s ease;
-    }
-
-    .info-block p {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      font-size: 0.9em;
-      margin: 0;
-      text-align: center;
-    }
-
-    .info-block:hover span {
-      opacity: 0;
-    }
-
-    .info-block:hover p {
-      display: block;
-      opacity: 1;
-    }
-
-    /* Position des blocs circulaires */
-    .block-1 {
-      top: -50px;
-      left: 50%;
-      transform: translate(-50%, 0);
-    }
-
-    .block-2 {
-      top: 50%;
-      left: -50px;
-      transform: translate(0, -50%);
-    }
-
-    .block-3 {
-      bottom: -50px;
-      left: 50%;
-      transform: translate(-50%, 0);
-    }
-
-    .block-4 {
-      top: 50%;
-      right: -50px;
-      transform: translate(0, -50%);
-    }
-
-    /* Bande d'infos avec logos */
-    .logo-section {
-      padding: 50px 0;
-      background-color: var(--block-bg-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 40px;
-    }
-
-    .logo-section img {
-      width: 50px;
-      transition: transform 0.3s ease;
-    }
-
-    .logo-section img:hover {
-      transform: scale(1.1);
-    }
-
-    /* Style spécifique pour le logo GitHub pour une meilleure visibilité */
-    .github-logo {
-      filter: brightness(1.5); /* Augmente la luminosité */
-      transition: filter 0.3s ease, transform 0.3s ease;
-    }
-
-    .github-logo:hover {
-      filter: brightness(2) saturate(1.5); /* Rend le logo encore plus lumineux et coloré au survol */
-      transform: scale(1.2); /* Légèrement plus grand au survol */
-    }
-
-    /* Section about */
-    .about-section {
-      padding: 100px 20px;
-      background-color: var(--block-bg-color);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about-section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: var(--highlight-color);
-    }
-
-    .about-section p {
-      font-size: 1.2rem;
-      max-width: 800px;
-      margin: 0 auto;
-      color: var(--text-color);
-    }
-
-    /* Section Interviews */
-    .interviews-section {
-      padding: 50px 0;
-      background-color: #e0e7ff;
-      text-align: center;
-    }
-
-    .interviews-section h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: var(--highlight-color);
-    }
-
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 ratio */
-      height: 0;
-      overflow: hidden;
-      max-width: 100%;
-      background: #000;
-    }
-    
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-
-    /* Carrousel des projets */
-    .carousel-section {
-      padding: 100px 20px;
-      background-color: var(--block-bg-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow-x: auto;
-      gap: 20px;
-    }
-
-    .carousel {
-      display: flex;
-      scroll-snap-type: x mandatory;
-      padding: 20px;
-    }
-
-    .carousel-item {
-      min-width: 300px;
-      background-color: var(--block-bg-color);
-      padding: 30px;
-      border-radius: 20px;
-      color: var(--text-color);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      scroll-snap-align: center;
-    }
-
-    .carousel-item:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
-    }
-
-    /* Footer */
-    .footer {
-      background-color: var(--block-bg-color);
-      color: var(--text-color);
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .circle-container {
-        width: 400px;
-        height: 400px;
-      }
-
-      .circle-photo {
-        width: 150px;
-        height: 150px;
-      }
-
-      .info-block {
-        width: 80px;
-        height: 80px;
-      }
-
-      .info-block:hover {
-        width: 160px;
-        height: 160px;
-      }
-
-      .carousel-item {
-        min-width: 250px;
-      }
-
-      .logo-section img {
-        width: 40px;
-      }
-
-      .about-section h2 {
-        font-size: 2rem;
-      }
-    }
-  /* Styles pour les nouvelles sections */
-  .section {
-    padding: 50px 20px;
-    text-align: center;
-    background-color: var(--block-bg-color);
+  <!-- JSON-LD (à personnaliser) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Votre Nom",
+    "jobTitle":"Data / ML / Finance",
+    "url":"https://votre-domaine.tld",
+    "sameAs":[
+      "https://www.linkedin.com/in/votre-profil",
+      "https://github.com/votre-compte"
+    ]
   }
-  
-  .section h2 {
-    color: var(--highlight-color);
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
-  .section p {
-    font-size: 1.2rem;
-    color: var(--text-color);
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  /* Placeholder "Coming soon" */
-  .coming-soon {
-    font-size: 1.5rem;
-    color: var(--highlight-color);
-    opacity: 0.8;
-  }
-  </style>
+  </script>
 </head>
 
 <body>
+  <a class="skip-link" href="#content">Aller au contenu</a>
 
-  <!-- Barre de progression -->
-  <div class="progress-bar" id="progressBar"></div>
-
-  <!-- Barre de navigation -->
-  <nav class="navbar">
-    <a href="#article">Article</a>
-    <a href="#hero">Welcome</a>
-    <a href="#about">About me</a>
-    <a href="#interviews">Interviews</a>
-    <a href="#engineering-course">Engineering Course</a>
-    <a href="#international-mobility">International Mobility</a>
-    <a href="#sustainability">Sustainability & Civic Engagement</a>
-    <a href="#sports-activities">Sport & Other Activities</a>
-    <a href="#career-development">Career Development</a>
-
-  </nav>
-
-  <!-- Section d'intro avec image de fond et effet parallax -->
-  <section class="intro-section" id="hero">
-    <h1>Abderahmène Foufa</h1>
-    <p>Étudiant Ingénieur à l'ENSEEIHT</p>
-    <div class="enseeiht-logo">
-      <img src="assets/Images_site/N7.png" alt="Logo ENSEEIHT">
-    </div>
-  </section>
-
-  <!-- Section avec photo centrale et blocs circulaires autour -->
-  <section class="circle-section" id="about">
-    <div class="circle-container fade-in-scroll">
-      <div class="circle-photo">
-        <img src="assets/Images_site/Moi.jpg" alt="Abderahmène Foufa">
+  <header class="site-header" id="top">
+    <div class="container header-row">
+      <div class="brand">
+        <a class="brand-link" href="#top" aria-label="Retour en haut">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">Votre Nom</span>
+        </a>
+        <div class="brand-sub">Data Science · Machine Learning · Finance</div>
       </div>
-      <!-- Blocs circulaires autour de la photo avec texte statique et contenu supplémentaire au survol -->
-      <div class="info-block block-1">
-        <span>Étudiant Ingénieur</span>
-        <p>Étudiant Ingénieur à l'ENSEEIHT, passionné par la science numérique et les nouvelles technologies.</p>
-      </div>
-      <div class="info-block block-2">
-        <span>Sciences du Numérique</span>
-        <p>Sciences du Numérique : exploration des algorithmes, de la data science, et de l'IA.</p>
-      </div>
-      <div class="info-block block-3">
-        <span>Projets</span>
-        <p>Projets : développement de solutions innovantes pour améliorer la productivité et la collaboration.</p>
-      </div>
-      <div class="info-block block-4">
-        <span>Contact</span>
-        <p>Mail : foufa.amine.30@gmail.com<br>Tél : 0621587666</p>
+
+      <nav class="nav" aria-label="Navigation principale">
+        <a class="nav-link" href="#projects">Projets</a>
+        <a class="nav-link" href="#experience">Expérience</a>
+        <a class="nav-link" href="#skills">Compétences</a>
+        <a class="nav-link" href="#notes">Notes</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Basculer thème">
+          <span class="icon" aria-hidden="true">◐</span>
+        </button>
+        <a class="btn btn-primary" href="assets/cv.pdf" target="_blank" rel="noopener">CV</a>
       </div>
     </div>
-  </section>
+  </header>
 
-  <!-- Bande d'infos avec logos interactifs -->
-  <section class="logo-section fade-in-scroll">
-    <a href="https://www.linkedin.com/in/abderahmène-foufa-056a51210/" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo">
-    </a>
-    <a href="https://github.com/AmineF349" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo" class="github-logo">
-    </a>
-    <a href="assets/Images_site/CV_FR.pdf" target="_blank">
-      <img src="assets/Images_site/logoCVFR.webp" alt="CV en Français">
-    </a>
-    <a href="assets/Images_site/CV_ENG.pdf" target="_blank">
-      <img src="assets/Images_site/logoCVENG.webp" alt="CV en Anglais">
-    </a>
-  </section>
+  <main id="content">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <p class="kicker">Profil recruteur</p>
+          <h1>Portfolio sobre, orienté preuves.</h1>
+          <p class="lead">
+            Je construis des modèles (data/ML, finance), des pipelines et des automatisations robustes.
+            Je privilégie : clarté, métriques, reproductibilité, code propre.
+          </p>
 
-  <!-- Section Interviews -->
-  <section class="interviews-section fade-in-scroll" id="interviews">
-    <h2>Interviews</h2>
-    <p class="container">Découvrez les interviews récentes sur divers sujets intéressants.</p>
+          <div class="hero-metrics" role="list">
+            <div class="metric" role="listitem">
+              <div class="metric-value">ML</div>
+              <div class="metric-label">détection d’anomalies · NLP · features</div>
+            </div>
+            <div class="metric" role="listitem">
+              <div class="metric-value">Finance</div>
+              <div class="metric-label">DCF · NPV/IRR · portefeuille · risk</div>
+            </div>
+            <div class="metric" role="listitem">
+              <div class="metric-value">Eng</div>
+              <div class="metric-label">Python · APIs · data pipelines · automation</div>
+            </div>
+          </div>
 
-    <div class="video-container">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/MBgkOivZqPI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#projects">Voir les projets</a>
+            <button class="btn btn-ghost" id="copyEmailBtn" type="button" data-email="votre.email@domaine.tld">
+              Copier email
+            </button>
+            <a class="btn btn-ghost" href="https://aminef349.github.io/aminefoufa/" target="_blank" rel="noopener">
+              Ancien site
+            </a>
+          </div>
 
-  </section>
-  <!-- Engineering Course Section -->
-  <section class="section" id="engineering-course">
-    <h2>Engineering Course</h2>
-    <p>During my engineering journey, I have been involved in various projects to develop my skills and contribute to practical innovations.</p>
-    <div class="carousel">
-      <div class="carousel-item">
-        <h3>Website Design for Enertec France</h3>
-        <p>Created a complex website to simplify the management and use of solar equipment for sale.</p>
+          <p class="fine">
+            Actuellement : étudiant (SN / informatique). Cibles : Data Science / ML / Quant / Corporate Finance.
+          </p>
+        </div>
+
+        <aside class="hero-card" aria-label="Résumé">
+          <div class="profile">
+            <div class="avatar" role="img" aria-label="Portrait">
+              <!-- Option 1 : mettez une image -->
+              <!-- <img src="assets/portrait.jpg" alt="Portrait" /> -->
+              <!-- Option 2 : avatar généré via CSS -->
+            </div>
+
+            <div class="profile-meta">
+              <div class="profile-name">Votre Nom</div>
+              <div class="profile-line">Europe · Remote/On-site</div>
+              <div class="profile-links">
+                <a class="chip" href="https://www.linkedin.com/in/votre-profil" target="_blank" rel="noopener">LinkedIn</a>
+                <a class="chip" href="https://github.com/votre-compte" target="_blank" rel="noopener">GitHub</a>
+                <a class="chip" href="#contact">Contact</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="bullets">
+            <div class="bullet">
+              <div class="bullet-title">Positionnement</div>
+              <div class="bullet-text">Projets concrets + études de cas, orientés résultats.</div>
+            </div>
+            <div class="bullet">
+              <div class="bullet-title">Méthode</div>
+              <div class="bullet-text">Baseline → métriques → itération → documentation.</div>
+            </div>
+            <div class="bullet">
+              <div class="bullet-title">Stack</div>
+              <div class="bullet-text">Python, SQL, APIs, notebooks, Docker (selon besoin).</div>
+            </div>
+          </div>
+        </aside>
       </div>
-      <div class="carousel-item">
-        <h3>Smart Parking Application</h3>
-        <p>Developed an application to monitor parking availability in major cities.</p>
-      </div>
-      <div class="carousel-item">
-        <h3>Game for Ecological and Humanitarian Support</h3>
-        <p>Participated in creating a game where playtime supports ecological and humanitarian causes through an integrated ad system.</p>
-      </div>
-    </div>
-  </section>
-<!-- International Mobility Section -->
-  <section class="section" id="international-mobility">
-      <h2>International Mobility</h2>
-      <p>I aspire to further my studies internationally. My target universities include Georgia Tech for IT studies, KTH in Sweden, and the University of Granada in Spain, renowned for their innovative environments and focus on technology.</p>
     </section>
-  <!-- Sustainability & Civic Engagement Section -->
-  <section class="section" id="sustainability">
-    <h2>Sustainability & Civic Engagement</h2>
-    <p class="coming-soon">Coming soon...</p>
-  </section>
-<!-- Sport & Other Activities Section -->
-  <section class="section" id="sports-activities">
-    <h2>Sport & Other Activities</h2>
-    <p>In my free time, I enjoy sports, particularly volleyball, and exploring new places. These activities keep me active, balanced, and motivated.</p>
-  </section>
-<!-- Career Development Section -->
-  <section class="section" id="career-development">
-    <h2>Career Development</h2>
-    <p class="coming-soon">Coming soon...</p>
-  </section>
 
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <h2>Projets sélectionnés</h2>
+          <p class="muted">Filtrables. Remplace les liens “Repo/Demo” par les tiens.</p>
+        </div>
 
-  <!-- Carrousel de projets renommé en Career Projects -->
-  <section class="carousel-section fade-in-scroll" id="projects">
+        <div class="filters">
+          <div class="filter-group" role="group" aria-label="Filtre projets">
+            <button class="pill is-active" type="button" data-filter="all">Tous</button>
+            <button class="pill" type="button" data-filter="ml">Data/ML</button>
+            <button class="pill" type="button" data-filter="finance">Finance</button>
+            <button class="pill" type="button" data-filter="automation">Automation</button>
+            <button class="pill" type="button" data-filter="software">Software</button>
+          </div>
 
-  </section>
+          <label class="search">
+            <span class="sr-only">Rechercher un projet</span>
+            <input id="projectSearch" type="search" placeholder="Recherche (ex: DCF, anomaly, Selenium, FastAPI…)" autocomplete="off" />
+          </label>
+        </div>
 
-  <section class="section" id="retake">
-    <h2>Retake Submission</h2>
-    <p>All required videos and the article for the English retake are available below.</p>
-  
-    <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/TH6LmYjdQsU" frameborder="0" allowfullscreen></iframe>
-    </div>
-  
-    <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/aoMZi7m9OZA" frameborder="0" allowfullscreen></iframe>
-    </div>
-  
-    <h3>Article — Apple Vision Pro Analysis</h3>
-    <p>
-      I analyse the Apple Vision Pro launch coverage in The Verge and the Financial Times. The Verge emphasizes emotional, user-focused language and technical fascination. Financial Times takes a strategic, business-oriented perspective, focusing on risks, pricing, and market positioning. This comparison shows how each media outlet tailors its language and angle to fit its audience, revealing clear differences in bias and complexity.
-    </p>
-  </section>
+        <div class="grid" id="projectsGrid">
+          <!-- 1 -->
+          <article class="card project" data-tags="ml,finance" data-title="Anomaly Detection — Kernel Isolation Forest (repro + notes)">
+            <div class="card-top">
+              <h3>Anomaly Detection — Kernel Isolation Forest</h3>
+              <div class="tags">
+                <span class="tag">ML</span>
+                <span class="tag">Anomaly</span>
+                <span class="tag">Kernel</span>
+              </div>
+            </div>
+            <p class="card-desc">
+              Notes structurées + reproduction guidée (pipelines, choix métriques, limites, améliorations possibles).
+            </p>
+            <ul class="list">
+              <li>Normalisation + features : impact sur score d’anomalie</li>
+              <li>Évaluation : AUC/PR (selon setup) + sanity checks</li>
+              <li>Objectif : transférer la logique aux données tabulaires/financières</li>
+            </ul>
+            <div class="card-actions">
+              <a class="link" href="#" target="_blank" rel="noopener">Repo</a>
+              <a class="link" href="#" target="_blank" rel="noopener">Note</a>
+            </div>
+          </article>
 
-  <section class="section" id="article" oncontextmenu="return false" onselectstart="return false" onmousedown="return false">
-    <h2>Apple Vision Pro Analysis</h2>
-    <h3>The Verge vs Financial Times — Two worlds, one headset</h3>
-  
-    <p style="text-align: left; max-width: 800px; margin: 20px auto;">
-      When Apple announced the Vision Pro, tech fans probably fainted, investors probably checked their wallets, and everyone else just said: "Wait, how much?". 
-      <a href="https://www.theverge.com/2023/6/5/23749387/apple-vision-pro-vr-ar-headset-price-specs-features" target="_blank">The Verge</a> basically called it a magical window into the future, using words like "mind-blowing" and "next-level immersion" that sound more like a Marvel trailer than tech journalism. They focus on the user experience, the futuristic interfaces, and how you'll finally live your dream of floating app windows in the air like Tony Stark.
-    </p>
-    <p style="text-align: left; max-width: 800px; margin: 20px auto;">
-      Meanwhile, <a href="https://www.ft.com/content/4d7b4bde-9b7a-4ee7-9308-5b7f15e90e5d" target="_blank">Financial Times</a> plays the responsible adult at the party. They ask the tough questions: Can people afford it? Can Apple even make enough units? Will anyone wear it outside their living room? Their article focuses on strategy, pricing risks, and whether Tim Cook has bet the farm or just planted a new money tree. The tone is analytical, serious, and probably written while sipping black coffee, not a unicorn frappuccino.
-    </p>
-    <p style="text-align: left; max-width: 800px; margin: 20px auto;">
-      It’s fascinating to see how the same product becomes a sci-fi adventure in one outlet and a business chess move in another. The Verge wants you to dream, Financial Times wants you to calculate. Together, they show us that perspective changes everything — a bit like when you realize your "great" startup idea already exists... three times.
-    </p>
-    <p style="text-align: left; max-width: 800px; margin: 20px auto;">
-      In short, whether you’re a tech dreamer or a cautious investor, the Vision Pro gives you something to talk (or argue) about. And maybe, just maybe, a reason to start saving... a lot.
-    </p>
-  </section>
+          <!-- 2 -->
+          <article class="card project" data-tags="automation,ml" data-title="Analyse de sentiment d’avis clients — Selenium + LLM">
+            <div class="card-top">
+              <h3>Analyse de sentiment d’avis clients</h3>
+              <div class="tags">
+                <span class="tag">Automation</span>
+                <span class="tag">Selenium</span>
+                <span class="tag">NLP</span>
+              </div>
+            </div>
+            <p class="card-desc">
+              Script Python : extraction d’avis, classification (positif/négatif) et actions automatisées sur l’UI.
+            </p>
+            <ul class="list">
+              <li>Robustesse DOM (sélecteurs, fallbacks, retries)</li>
+              <li>Traçabilité : logs + export résultats</li>
+              <li>Mode “safe” : limites de fréquence / anti-clics intempestifs</li>
+            </ul>
+            <div class="card-actions">
+              <a class="link" href="#" target="_blank" rel="noopener">Repo</a>
+              <a class="link" href="#" target="_blank" rel="noopener">Démo</a>
+            </div>
+          </article>
 
+          <!-- 3 -->
+          <article class="card project" data-tags="finance" data-title="Corporate Finance Toolkit — NPV/IRR, DCF, WACC">
+            <div class="card-top">
+              <h3>Corporate Finance Toolkit (Excel + Python)</h3>
+              <div class="tags">
+                <span class="tag">Finance</span>
+                <span class="tag">DCF</span>
+                <span class="tag">NPV/IRR</span>
+              </div>
+            </div>
+            <p class="card-desc">
+              Modèles réutilisables : FCFF, WACC, sensibilités, scénarios, checks de cohérence.
+            </p>
+            <ul class="list">
+              <li>FCFF = EBIT(1−T)+D&amp;A−Capex−ΔNWC</li>
+              <li>Sensibilités : r, g, marges, capex, ΔNWC</li>
+              <li>Contrôles : EV↔Equity, unités, dates, terminal value</li>
+            </ul>
+            <div class="card-actions">
+              <a class="link" href="#" target="_blank" rel="noopener">Fichier</a>
+              <a class="link" href="#" target="_blank" rel="noopener">Résumé</a>
+            </div>
+          </article>
 
-  
-  <!-- Footer -->
+          <!-- 4 -->
+          <article class="card project" data-tags="finance,ml" data-title="Portfolio Theory — Frontière efficiente & Sharpe">
+            <div class="card-top">
+              <h3>Portfolio Theory (CAPM &amp; Efficient Frontier)</h3>
+              <div class="tags">
+                <span class="tag">Finance</span>
+                <span class="tag">Risk</span>
+                <span class="tag">Optim</span>
+              </div>
+            </div>
+            <p class="card-desc">
+              Calculs et visualisations : rendements, variance/covariance, MVP, CML, Sharpe.
+            </p>
+            <ul class="list">
+              <li>Σ, covariances, corrélations, diversification</li>
+              <li>MVP + portefeuille tangent (contraintes explicites)</li>
+              <li>Reproductible : notebooks + data pipeline simple</li>
+            </ul>
+            <div class="card-actions">
+              <a class="link" href="#" target="_blank" rel="noopener">Repo</a>
+              <a class="link" href="#" target="_blank" rel="noopener">Notebook</a>
+            </div>
+          </article>
+
+          <!-- 5 -->
+          <article class="card project" data-tags="software,automation" data-title="CRM / Lead Ops — n8n + Sheets + téléphonie">
+            <div class="card-top">
+              <h3>CRM / Lead Ops — Automatisation</h3>
+              <div class="tags">
+                <span class="tag">Automation</span>
+                <span class="tag">Ops</span>
+                <span class="tag">APIs</span>
+              </div>
+            </div>
+            <p class="card-desc">
+              Workflows : collecte, scoring, segmentation, suivi. Objectif : réduire le temps “manuel” à l’essentiel.
+            </p>
+            <ul class="list">
+              <li>Chaîne : capture → enrichissement → scoring → routage</li>
+              <li>Historique actions + normalisation champs</li>
+              <li>Design “audit-friendly” (traces, états, erreurs)</li>
+            </ul>
+            <div class="card-actions">
+              <a class="link" href="#" target="_blank" rel="noopener">Schéma</a>
+              <a class="link" href="#" target="_blank" rel="noopener">Cas d’usage</a>
+            </div>
+          </article>
+
+          <!-- 6 -->
+          <article class="card project" data-tags="software" data-title="App mobile arbitres — React Native + FastAPI + Postgres">
+            <div class="card-top">
+              <h3>App mobile — React Native / FastAPI</h3>
+              <div class="tags">
+                <span class="tag">Software</span>
+                <span class="tag">API</span>
+                <span class="tag">DB</span>
+              </div>
+            </div>
+            <p class="card-desc">
+              Dashboard, chat temps réel, forums, quiz règles, gestion matchs, profils/badges.
+            </p>
+            <ul class="list">
+              <li>Architecture backend : FastAPI + PostgreSQL</li>
+              <li>Auth, permissions, modèles de données</li>
+              <li>Objectif : UX simple, données propres, endpoints testables</li>
+            </ul>
+            <div class="card-actions">
+              <a class="link" href="#" target="_blank" rel="noopener">Repo</a>
+              <a class="link" href="#" target="_blank" rel="noopener">Screens</a>
+            </div>
+          </article>
+
+          <!-- 7 -->
+          <article class="card project" data-tags="automation,software" data-title="Scraping Pages Blanches — Excel → Selenium">
+            <div class="card-top">
+              <h3>Scraping — Excel → Selenium (Pages Blanches)</h3>
+              <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">Selenium</span>
+                <span class="tag">Data</span>
+              </div>
+            </div>
+            <p class="card-desc">
+              Lecture Excel (Nom/CP), recherche, remplissage automatique du téléphone, gestion des “no match”.
+            </p>
+            <ul class="list">
+              <li>Hygiène de code : modules minimalistes, erreurs gérées</li>
+              <li>Règles : correspondances strictes, logs, contrôles</li>
+              <li>Export propre pour usage business</li>
+            </ul>
+            <div class="card-actions">
+              <a class="link" href="#" target="_blank" rel="noopener">Repo</a>
+              <a class="link" href="#" target="_blank" rel="noopener">Doc</a>
+            </div>
+          </article>
+
+          <!-- 8 -->
+          <article class="card project" data-tags="software" data-title="Java Swing — Suivi nutrition (UI moderne + graphiques)">
+            <div class="card-top">
+              <h3>Java Swing — Suivi nutrition</h3>
+              <div class="tags">
+                <span class="tag">Java</span>
+                <span class="tag">UI</span>
+                <span class="tag">Charts</span>
+              </div>
+            </div>
+            <p class="card-desc">
+              UI refaite style “mobile”, thème clair/sombre, repas du jour, export Excel, courbes calories.
+            </p>
+            <ul class="list">
+              <li>Composants custom + layout clean</li>
+              <li>Persistance utilisateurs + repas</li>
+              <li>Graph hebdo : calories consommées</li>
+            </ul>
+            <div class="card-actions">
+              <a class="link" href="#" target="_blank" rel="noopener">Repo</a>
+              <a class="link" href="#" target="_blank" rel="noopener">Vidéo</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="empty-state" id="emptyState" hidden>
+          Aucun projet ne correspond au filtre/recherche.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head">
+          <h2>Expérience</h2>
+          <p class="muted">Version courte. Remplace/ajuste les lignes selon ton CV.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-body">
+              <div class="tl-top">
+                <h3>Responsable commercial — Énergies / transition énergétique</h3>
+                <div class="tl-meta">2023–2025 · France</div>
+              </div>
+              <ul class="list">
+                <li>Vente consultative, qualification, structuration process (CRM, scripts, reporting)</li>
+                <li>Automatisation (collecte leads, segmentation, relances)</li>
+                <li>Vision “données” : funnels, taux de conversion, tests</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-body">
+              <div class="tl-top">
+                <h3>Freelance — Automation / Web / Data</h3>
+                <div class="tl-meta">2024–2026 · Europe</div>
+              </div>
+              <ul class="list">
+                <li>Scripts Python (scraping, nettoyage, export), intégrations APIs</li>
+                <li>Prototypes : dashboards, automatisations n8n/Sheets</li>
+                <li>Livraison orientée usage : doc + qualité + maintenabilité</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-body">
+              <div class="tl-top">
+                <h3>Stage — Web + services (garage automobile)</h3>
+                <div class="tl-meta">Été 2024</div>
+              </div>
+              <ul class="list">
+                <li>Site web, prise de RDV, blog, SEO</li>
+                <li>Sécurisation et automatisation (facturation/RDV)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-head">
+          <h2>Compétences</h2>
+          <p class="muted">Conçues pour lecture rapide par recruteur.</p>
+        </div>
+
+        <div class="cols">
+          <div class="panel">
+            <h3>Data / ML</h3>
+            <div class="chips">
+              <span class="chip">Feature engineering</span>
+              <span class="chip">Anomaly detection</span>
+              <span class="chip">Classification</span>
+              <span class="chip">Evaluation (AUC/PR)</span>
+              <span class="chip">Data cleaning</span>
+              <span class="chip">Experiment tracking (simple)</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Finance</h3>
+            <div class="chips">
+              <span class="chip">NPV / IRR</span>
+              <span class="chip">DCF (FCFF)</span>
+              <span class="chip">WACC</span>
+              <span class="chip">Portfolio theory</span>
+              <span class="chip">Ratios (ROIC/ROE)</span>
+              <span class="chip">Sensitivities / scenarios</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Software / Data Eng</h3>
+            <div class="chips">
+              <span class="chip">Python</span>
+              <span class="chip">SQL</span>
+              <span class="chip">FastAPI</span>
+              <span class="chip">PostgreSQL</span>
+              <span class="chip">Selenium</span>
+              <span class="chip">Git</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Ops</h3>
+            <div class="chips">
+              <span class="chip">Automation workflows</span>
+              <span class="chip">Google Sheets</span>
+              <span class="chip">Data quality checks</span>
+              <span class="chip">Logging</span>
+              <span class="chip">Documentation</span>
+              <span class="chip">Stakeholders</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu">
+          <div class="panel">
+            <h3>Formation</h3>
+            <ul class="list">
+              <li>ENSEEIHT — Sciences du Numérique (SN), informatique (en cours)</li>
+              <li>Domaines : traitement du signal, réseaux, systèmes, architecture, ML (TPs)</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Certifications / cours (sélection)</h3>
+            <ul class="list">
+              <li>Corporate Finance (TVM, valuation, bonds, capital budgeting)</li>
+              <li>Portfolio theory (risk/return, covariance, Sharpe)</li>
+              <li>À compléter : certifications cloud / data si pertinent</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="notes">
+      <div class="container">
+        <div class="section-head">
+          <h2>Notes &amp; études de cas</h2>
+          <p class="muted">Prouver la pensée : modèles, dérivations, checks, synthèses.</p>
+        </div>
+
+        <div class="grid grid-2">
+          <article class="card">
+            <h3>DCF : playbook de cohérence</h3>
+            <p class="card-desc">
+              EV vs Equity, ΔNWC, taxes, terminal value, unités, dates. Checklist utilisable en entretien.
+            </p>
+            <div class="card-actions">
+              <a class="link" href="#" target="_blank" rel="noopener">Lire</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Risque : variance/covariance</h3>
+            <p class="card-desc">
+              Formules + exemples chiffrés (portefeuille, MVP, corrélations) + interprétation.
+            </p>
+            <div class="card-actions">
+              <a class="link" href="#" target="_blank" rel="noopener">Lire</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Selenium : robustesse &amp; anti-fragile</h3>
+            <p class="card-desc">
+              Patterns : waits, retries, timeouts, selectors stables, logs, export, tests simples.
+            </p>
+            <div class="card-actions">
+              <a class="link" href="#" target="_blank" rel="noopener">Lire</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>ML : métriques et pièges</h3>
+            <p class="card-desc">
+              Baselines, leakage, AUC/PR, calibration, drift, jeux de données déséquilibrés.
+            </p>
+            <div class="card-actions">
+              <a class="link" href="#" target="_blank" rel="noopener">Lire</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <h2>Contact</h2>
+          <p class="muted">Réponse rapide. Remplace les placeholders.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="panel">
+            <h3>Coordonnées</h3>
+            <div class="kv">
+              <div class="k">Email</div>
+              <div class="v"><a href="mailto:votre.email@domaine.tld">votre.email@domaine.tld</a></div>
+
+              <div class="k">LinkedIn</div>
+              <div class="v"><a href="https://www.linkedin.com/in/votre-profil" target="_blank" rel="noopener">linkedin.com/in/votre-profil</a></div>
+
+              <div class="k">GitHub</div>
+              <div class="v"><a href="https://github.com/votre-compte" target="_blank" rel="noopener">github.com/votre-compte</a></div>
+            </div>
+            <div class="divider"></div>
+            <p class="fine">
+              Intérêts : data/ML appliqués à la finance, automatisation, systèmes propres et mesurables.
+            </p>
+          </div>
+
+          <form class="panel form" id="contactForm" autocomplete="on">
+            <h3>Message (local)</h3>
+            <p class="muted small">
+              Ce formulaire génère un email via ton client (pas de backend).
+            </p>
+
+            <label class="field">
+              <span>Nom</span>
+              <input name="name" type="text" placeholder="Votre nom" required />
+            </label>
+
+            <label class="field">
+              <span>Objet</span>
+              <input name="subject" type="text" placeholder="Entretien / mission / question" required />
+            </label>
+
+            <label class="field">
+              <span>Message</span>
+              <textarea name="message" rows="6" placeholder="Votre message…" required></textarea>
+            </label>
+
+            <button class="btn btn-primary" type="submit">Ouvrir email</button>
+            <div class="fine" id="formHint" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer class="footer">
-    <p>&copy; 2024 Abderahmène Foufa | Designed by Abderahmène</p>
+    <div class="container footer-row">
+      <div class="muted small">
+        © <span id="year"></span> Votre Nom. Construit en HTML/CSS/JS.
+      </div>
+      <button class="btn btn-ghost" id="backToTop" type="button">Haut</button>
+    </div>
   </footer>
-
-  <!-- Script pour les animations au scroll et la barre de progression -->
-  <script>
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    });
-
-    document.querySelectorAll('.fade-in-scroll').forEach(el => {
-      observer.observe(el);
-    });
-
-    window.onscroll = function () {
-      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      var scrolled = (winScroll / height) * 100;
-      document.getElementById("progressBar").style.width = scrolled + "%";
-    };
-  </script>
-
 </body>
-
 </html>
