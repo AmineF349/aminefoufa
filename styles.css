@@ -255,8 +255,8 @@ h1{
   align-items:center;
 }
 .avatar{
-  width:72px;height:72px;
-  border-radius:22px;
+  width:120px;height:120px;
+  border-radius:28px;
   background:
     radial-gradient(circle at 30% 20%, rgba(255,255,255,.30), transparent 40%),
     linear-gradient(135deg, rgba(154,230,255,.35), rgba(183,255,176,.30));
