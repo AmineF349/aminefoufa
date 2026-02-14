@@ -1,617 +1,82 @@
-<!-- index.html -->
 <!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
+  <title>Shana, veux-tu être ma Valentine ?</title>
+  <meta name="description" content="Une demande de Saint-Valentin élégante et interactive." />
 
-  <title>Foufa Amine — Data / ML / Finance</title>
-  <meta name="description" content="Portfolio sobre pour recruteurs : data science, machine learning, finance. Projets, études de cas, compétences et contact." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Foufa Amine — Data / ML / Finance" />
-  <meta property="og:description" content="Projets data/ML, modèles finance, automatisation et ingénierie logicielle." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/portrait.jpg" />
-
-  <link rel="icon" href="assets/favicon.png" />
   <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
-
-  <!-- JSON-LD (à personnaliser) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Person",
-    "name":"Foufa Amine",
-    "jobTitle":"Data / ML / Finance",
-    "url":"https://votre-domaine.tld",
-    "sameAs":[
-      "https://www.linkedin.com/in/amine-foufa-056a51210/",
-      "https://github.com/AmineF349"
-    ]
-  }
-  </script>
 </head>
 
 <body>
-  <a class="skip-link" href="#content">Aller au contenu</a>
+  <div class="bg">
+    <div class="grain" aria-hidden="true"></div>
+    <div class="sparkles" aria-hidden="true"></div>
+    <div id="hearts" class="hearts" aria-hidden="true"></div>
+  </div>
 
-  <header class="site-header" id="top">
-    <div class="container header-row">
-      <div class="brand">
-        <a class="brand-link" href="#top" aria-label="Retour en haut">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-name">Foufa Amine</span>
-        </a>
-        <div class="brand-sub">Data Science · Machine Learning · Finance</div>
-      </div>
+  <main class="wrap">
+    <section class="card" role="group" aria-label="Demande de Saint-Valentin">
+      <header class="top">
+        <div class="badge">Saint-Valentin</div>
+        <div class="sig" aria-hidden="true"></div>
+      </header>
 
-      <nav class="nav" aria-label="Navigation principale">
-        <a class="nav-link" href="#projects">Projets</a>
-        <a class="nav-link" href="#experience">Expérience</a>
-        <a class="nav-link" href="#skills">Compétences</a>
-        <a class="nav-link" href="#notes">Notes</a>
-        <a class="nav-link" href="#contact">Contact</a>
-      </nav>
+      <div class="content">
+        <h1 class="title">
+          <span class="title--small">Shana,</span>
+          <span class="title--big">veux-tu être ma Valentine ?</span>
+        </h1>
 
-      <div class="header-actions">
-        <button class="icon-btn" id="themeToggle" type="button" aria-label="Basculer thème">
-          <span class="icon" aria-hidden="true">◐</span>
-        </button>
-        <a class="btn btn-primary" href="assets/cv.pdf" target="_blank" rel="noopener">CV</a>
-      </div>
-    </div>
-  </header>
+        <p class="subtitle" id="subtitle">
+          J’ai un petit plan pour nous. Une seule question avant.
+        </p>
 
-  <main id="content">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-text">
-          <p class="kicker">Profil recruteur</p>
-          <h1>Portfolio sobre, orienté preuves.</h1>
-          <p class="lead">
-            Je construis des modèles (data/ML, finance), des pipelines et des automatisations robustes.
-            Je privilégie : clarté, métriques, reproductibilité, code propre.
-          </p>
+        <div class="cta" id="cta">
+          <button class="btn btn--yes" id="yesBtn" type="button">
+            Oui
+            <span class="btn-glow" aria-hidden="true"></span>
+          </button>
 
-          <div class="hero-metrics" role="list">
-            <div class="metric" role="listitem">
-              <div class="metric-value">ML</div>
-              <div class="metric-label">détection d’anomalies · NLP · features</div>
-            </div>
-            <div class="metric" role="listitem">
-              <div class="metric-value">Finance</div>
-              <div class="metric-label">DCF · NPV/IRR · portefeuille · risk</div>
-            </div>
-            <div class="metric" role="listitem">
-              <div class="metric-value">Eng</div>
-              <div class="metric-label">Python · APIs · data pipelines · automation</div>
-            </div>
-          </div>
-
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#projects">Voir les projets</a>
-            <button class="btn btn-ghost" id="copyEmailBtn" type="button" data-email="foufa.amine.30@gmail.com">
-              Copier email
-            </button>
-            <a class="btn btn-ghost" href="https://aminef349.github.io/aminefoufa/" target="_blank" rel="noopener">
-              Ancien site
-            </a>
-          </div>
-
-          <p class="fine">
-            Actuellement : étudiant (SN / informatique). Cibles : Data Science / ML / Quant / Corporate Finance.
-          </p>
+          <button class="btn btn--no" id="noBtn" type="button">
+            Non
+          </button>
         </div>
 
-        <aside class="hero-card" aria-label="Résumé">
-          <div class="profile">
-            <div class="avatar" role="img" aria-label="Portrait">
-              <!-- Option 1 : mettez une image -->
-              <img src="assets/portrait.jpg" alt="Portrait" />
-              <!-- Option 2 : avatar généré via CSS -->
+        <div class="note" id="note" aria-live="polite"></div>
+
+        <div class="reveal" id="reveal" hidden>
+          <div class="letter">
+            <div class="letter-top">
+              <div class="seal" aria-hidden="true"></div>
+              <div class="letter-title">Pour toi</div>
             </div>
 
-            <div class="profile-meta">
-              <div class="profile-name">Foufa Amine</div>
-              <div class="profile-line">Europe · Remote/On-site</div>
-              <div class="profile-links">
-                <a class="chip" href="https://www.linkedin.com/in/amine-foufa-056a51210/" target="_blank" rel="noopener">LinkedIn</a>
-                <a class="chip" href="https://github.com/AmineF349/aminefoufa" target="_blank" rel="noopener">GitHub</a>
-                <a class="chip" href="foufa.amine.30@gmail.com">Contact</a>
-              </div>
-            </div>
-          </div>
+            <p class="letter-body" id="letterBody"></p>
 
-          <div class="divider"></div>
-
-          <div class="bullets">
-            <div class="bullet">
-              <div class="bullet-title">Positionnement</div>
-              <div class="bullet-text">Projets concrets + études de cas, orientés résultats.</div>
-            </div>
-            <div class="bullet">
-              <div class="bullet-title">Méthode</div>
-              <div class="bullet-text">Baseline → métriques → itération → documentation.</div>
-            </div>
-            <div class="bullet">
-              <div class="bullet-title">Stack</div>
-              <div class="bullet-text">Python, SQL, APIs, notebooks, Docker (selon besoin).</div>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section" id="projects">
-      <div class="container">
-        <div class="section-head">
-          <h2>Projets sélectionnés</h2>
-          <p class="muted">To do : Mettre les Repo/Demo</p>
-        </div>
-
-        <div class="filters">
-          <div class="filter-group" role="group" aria-label="Filtre projets">
-            <button class="pill is-active" type="button" data-filter="all">Tous</button>
-            <button class="pill" type="button" data-filter="ml">Data/ML</button>
-            <button class="pill" type="button" data-filter="finance">Finance</button>
-            <button class="pill" type="button" data-filter="automation">Automation</button>
-            <button class="pill" type="button" data-filter="software">Software</button>
-          </div>
-
-          <label class="search">
-            <span class="sr-only">Rechercher un projet</span>
-            <input id="projectSearch" type="search" placeholder="Recherche (ex: DCF, anomaly, Selenium, FastAPI…)" autocomplete="off" />
-          </label>
-        </div>
-
-        <div class="grid" id="projectsGrid">
-          <!-- 1 -->
-          <article class="card project" data-tags="ml,finance" data-title="Anomaly Detection — Kernel Isolation Forest (repro + notes)">
-            <div class="card-top">
-              <h3>Anomaly Detection — Kernel Isolation Forest</h3>
-              <div class="tags">
-                <span class="tag">ML</span>
-                <span class="tag">Anomaly</span>
-                <span class="tag">Kernel</span>
-              </div>
-            </div>
-            <p class="card-desc">
-              Notes structurées + reproduction guidée (pipelines, choix métriques, limites, améliorations possibles).
-            </p>
-            <ul class="list">
-              <li>Normalisation + features : impact sur score d’anomalie</li>
-              <li>Évaluation : AUC/PR (selon setup) + sanity checks</li>
-              <li>Objectif : transférer la logique aux données tabulaires/financières</li>
-            </ul>
-            <div class="card-actions">
-              <a class="link" href="#" target="_blank" rel="noopener">Repo</a>
-              <a class="link" href="#" target="_blank" rel="noopener">Note</a>
-            </div>
-          </article>
-
-          <!-- 2 -->
-          <article class="card project" data-tags="automation,ml" data-title="Analyse de sentiment d’avis clients — Selenium + LLM">
-            <div class="card-top">
-              <h3>Analyse de sentiment d’avis clients</h3>
-              <div class="tags">
-                <span class="tag">Automation</span>
-                <span class="tag">Selenium</span>
-                <span class="tag">NLP</span>
-              </div>
-            </div>
-            <p class="card-desc">
-              Script Python : extraction d’avis, classification (positif/négatif) et actions automatisées sur l’UI.
-            </p>
-            <ul class="list">
-              <li>Robustesse DOM (sélecteurs, fallbacks, retries)</li>
-              <li>Traçabilité : logs + export résultats</li>
-              <li>Mode “safe” : limites de fréquence / anti-clics intempestifs</li>
-            </ul>
-            <div class="card-actions">
-              <a class="link" href="#" target="_blank" rel="noopener">Repo</a>
-              <a class="link" href="#" target="_blank" rel="noopener">Démo</a>
-            </div>
-          </article>
-
-          <!-- 3 -->
-          <article class="card project" data-tags="finance" data-title="Corporate Finance Toolkit — NPV/IRR, DCF, WACC">
-            <div class="card-top">
-              <h3>Corporate Finance Toolkit (Excel + Python)</h3>
-              <div class="tags">
-                <span class="tag">Finance</span>
-                <span class="tag">DCF</span>
-                <span class="tag">NPV/IRR</span>
-              </div>
-            </div>
-            <p class="card-desc">
-              Modèles réutilisables : FCFF, WACC, sensibilités, scénarios, checks de cohérence.
-            </p>
-            <ul class="list">
-              <li>FCFF = EBIT(1−T)+D&amp;A−Capex−ΔNWC</li>
-              <li>Sensibilités : r, g, marges, capex, ΔNWC</li>
-              <li>Contrôles : EV↔Equity, unités, dates, terminal value</li>
-            </ul>
-            <div class="card-actions">
-              <a class="link" href="#" target="_blank" rel="noopener">Fichier</a>
-              <a class="link" href="#" target="_blank" rel="noopener">Résumé</a>
-            </div>
-          </article>
-
-          <!-- 4 -->
-          <article class="card project" data-tags="finance,ml" data-title="Portfolio Theory — Frontière efficiente & Sharpe">
-            <div class="card-top">
-              <h3>Portfolio Theory (CAPM &amp; Efficient Frontier)</h3>
-              <div class="tags">
-                <span class="tag">Finance</span>
-                <span class="tag">Risk</span>
-                <span class="tag">Optim</span>
-              </div>
-            </div>
-            <p class="card-desc">
-              Calculs et visualisations : rendements, variance/covariance, MVP, CML, Sharpe.
-            </p>
-            <ul class="list">
-              <li>Σ, covariances, corrélations, diversification</li>
-              <li>MVP + portefeuille tangent (contraintes explicites)</li>
-              <li>Reproductible : notebooks + data pipeline simple</li>
-            </ul>
-            <div class="card-actions">
-              <a class="link" href="#" target="_blank" rel="noopener">Repo</a>
-              <a class="link" href="#" target="_blank" rel="noopener">Notebook</a>
-            </div>
-          </article>
-
-          <!-- 5 -->
-          <article class="card project" data-tags="software,automation" data-title="CRM / Lead Ops — n8n + Sheets + téléphonie">
-            <div class="card-top">
-              <h3>CRM / Lead Ops — Automatisation</h3>
-              <div class="tags">
-                <span class="tag">Automation</span>
-                <span class="tag">Ops</span>
-                <span class="tag">APIs</span>
-              </div>
-            </div>
-            <p class="card-desc">
-              Workflows : collecte, scoring, segmentation, suivi. Objectif : réduire le temps “manuel” à l’essentiel.
-            </p>
-            <ul class="list">
-              <li>Chaîne : capture → enrichissement → scoring → routage</li>
-              <li>Historique actions + normalisation champs</li>
-              <li>Design “audit-friendly” (traces, états, erreurs)</li>
-            </ul>
-            <div class="card-actions">
-              <a class="link" href="#" target="_blank" rel="noopener">Schéma</a>
-              <a class="link" href="#" target="_blank" rel="noopener">Cas d’usage</a>
-            </div>
-          </article>
-
-          <!-- 6 -->
-          <article class="card project" data-tags="software" data-title="App mobile arbitres — React Native + FastAPI + Postgres">
-            <div class="card-top">
-              <h3>App mobile — React Native / FastAPI</h3>
-              <div class="tags">
-                <span class="tag">Software</span>
-                <span class="tag">API</span>
-                <span class="tag">DB</span>
-              </div>
-            </div>
-            <p class="card-desc">
-              Dashboard, chat temps réel, forums, quiz règles, gestion matchs, profils/badges.
-            </p>
-            <ul class="list">
-              <li>Architecture backend : FastAPI + PostgreSQL</li>
-              <li>Auth, permissions, modèles de données</li>
-              <li>Objectif : UX simple, données propres, endpoints testables</li>
-            </ul>
-            <div class="card-actions">
-              <a class="link" href="#" target="_blank" rel="noopener">Repo</a>
-              <a class="link" href="#" target="_blank" rel="noopener">Screens</a>
-            </div>
-          </article>
-
-          <!-- 7 -->
-          <article class="card project" data-tags="automation,software" data-title="Scraping Pages Blanches — Excel → Selenium">
-            <div class="card-top">
-              <h3>Scraping — Excel → Selenium (Pages Blanches)</h3>
-              <div class="tags">
-                <span class="tag">Python</span>
-                <span class="tag">Selenium</span>
-                <span class="tag">Data</span>
-              </div>
-            </div>
-            <p class="card-desc">
-              Lecture Excel (Nom/CP), recherche, remplissage automatique du téléphone, gestion des “no match”.
-            </p>
-            <ul class="list">
-              <li>Hygiène de code : modules minimalistes, erreurs gérées</li>
-              <li>Règles : correspondances strictes, logs, contrôles</li>
-              <li>Export propre pour usage business</li>
-            </ul>
-            <div class="card-actions">
-              <a class="link" href="#" target="_blank" rel="noopener">Repo</a>
-              <a class="link" href="#" target="_blank" rel="noopener">Doc</a>
-            </div>
-          </article>
-
-          <!-- 8 -->
-          <article class="card project" data-tags="software" data-title="Java Swing — Suivi nutrition (UI moderne + graphiques)">
-            <div class="card-top">
-              <h3>Java Swing — Suivi nutrition</h3>
-              <div class="tags">
-                <span class="tag">Java</span>
-                <span class="tag">UI</span>
-                <span class="tag">Charts</span>
-              </div>
-            </div>
-            <p class="card-desc">
-              UI refaite style “mobile”, thème clair/sombre, repas du jour, export Excel, courbes calories.
-            </p>
-            <ul class="list">
-              <li>Composants custom + layout clean</li>
-              <li>Persistance utilisateurs + repas</li>
-              <li>Graph hebdo : calories consommées</li>
-            </ul>
-            <div class="card-actions">
-              <a class="link" href="#" target="_blank" rel="noopener">Repo</a>
-              <a class="link" href="#" target="_blank" rel="noopener">Vidéo</a>
-            </div>
-          </article>
-        </div>
-
-        <div class="empty-state" id="emptyState" hidden>
-          Aucun projet ne correspond au filtre/recherche.
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="experience">
-      <div class="container">
-        <div class="section-head">
-          <h2>Expérience</h2>
-          <p class="muted">Version courte. Remplace/ajuste les lignes selon ton CV.</p>
-        </div>
-
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-dot" aria-hidden="true"></div>
-            <div class="tl-body">
-              <div class="tl-top">
-                <h3>Responsable commercial — Énergies / transition énergétique</h3>
-                <div class="tl-meta">2023–2025 · France</div>
-              </div>
-              <ul class="list">
-                <li>Vente consultative, qualification, structuration process (CRM, scripts, reporting)</li>
-                <li>Automatisation (collecte leads, segmentation, relances)</li>
-                <li>Vision “données” : funnels, taux de conversion, tests</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-dot" aria-hidden="true"></div>
-            <div class="tl-body">
-              <div class="tl-top">
-                <h3>Freelance — Automation / Web / Data</h3>
-                <div class="tl-meta">2024–2026 · Europe</div>
-              </div>
-              <ul class="list">
-                <li>Scripts Python (scraping, nettoyage, export), intégrations APIs</li>
-                <li>Prototypes : dashboards, automatisations n8n/Sheets</li>
-                <li>Livraison orientée usage : doc + qualité + maintenabilité</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-dot" aria-hidden="true"></div>
-            <div class="tl-body">
-              <div class="tl-top">
-                <h3>Stage — Web + services (garage automobile)</h3>
-                <div class="tl-meta">Été 2024</div>
-              </div>
-              <ul class="list">
-                <li>Site web, prise de RDV, blog, SEO</li>
-                <li>Sécurisation et automatisation (facturation/RDV)</li>
-              </ul>
+            <div class="mini-actions">
+              <button class="btn btn--secondary" id="copyBtn" type="button">Copier le message</button>
+              <button class="btn btn--secondary" id="replayBtn" type="button">Rejouer</button>
             </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <section class="section" id="skills">
-      <div class="container">
-        <div class="section-head">
-          <h2>Compétences</h2>
-          <p class="muted">Conçues pour lecture rapide par recruteur.</p>
-        </div>
-
-        <div class="cols">
-          <div class="panel">
-            <h3>Data / ML</h3>
-            <div class="chips">
-              <span class="chip">Feature engineering</span>
-              <span class="chip">Anomaly detection</span>
-              <span class="chip">Classification</span>
-              <span class="chip">Evaluation (AUC/PR)</span>
-              <span class="chip">Data cleaning</span>
-              <span class="chip">Experiment tracking (simple)</span>
-            </div>
-          </div>
-
-          <div class="panel">
-            <h3>Finance</h3>
-            <div class="chips">
-              <span class="chip">NPV / IRR</span>
-              <span class="chip">DCF (FCFF)</span>
-              <span class="chip">WACC</span>
-              <span class="chip">Portfolio theory</span>
-              <span class="chip">Ratios (ROIC/ROE)</span>
-              <span class="chip">Sensitivities / scenarios</span>
-            </div>
-          </div>
-
-          <div class="panel">
-            <h3>Software / Data Eng</h3>
-            <div class="chips">
-              <span class="chip">Python</span>
-              <span class="chip">SQL</span>
-              <span class="chip">FastAPI</span>
-              <span class="chip">PostgreSQL</span>
-              <span class="chip">Selenium</span>
-              <span class="chip">Git</span>
-            </div>
-          </div>
-
-          <div class="panel">
-            <h3>Ops</h3>
-            <div class="chips">
-              <span class="chip">Automation workflows</span>
-              <span class="chip">Google Sheets</span>
-              <span class="chip">Data quality checks</span>
-              <span class="chip">Logging</span>
-              <span class="chip">Documentation</span>
-              <span class="chip">Stakeholders</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="edu">
-          <div class="panel">
-            <h3>Formation</h3>
-            <ul class="list">
-              <li>ENSEEIHT — Sciences du Numérique (SN), informatique (en cours)</li>
-              <li>Domaines : traitement du signal, réseaux, systèmes, architecture, ML (TPs)</li>
-            </ul>
-          </div>
-          <div class="panel">
-            <h3>Certifications / cours (sélection)</h3>
-            <ul class="list">
-              <li>Corporate Finance (TVM, valuation, bonds, capital budgeting)</li>
-              <li>Portfolio theory (risk/return, covariance, Sharpe)</li>
-              <li>À compléter : certifications cloud / data si pertinent</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="notes">
-      <div class="container">
-        <div class="section-head">
-          <h2>Notes &amp; études de cas</h2>
-          <p class="muted">Prouver la pensée : modèles, dérivations, checks, synthèses.</p>
-        </div>
-
-        <div class="grid grid-2">
-          <article class="card">
-            <h3>DCF : playbook de cohérence</h3>
-            <p class="card-desc">
-              EV vs Equity, ΔNWC, taxes, terminal value, unités, dates. Checklist utilisable en entretien.
-            </p>
-            <div class="card-actions">
-              <a class="link" href="#" target="_blank" rel="noopener">Lire</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>Risque : variance/covariance</h3>
-            <p class="card-desc">
-              Formules + exemples chiffrés (portefeuille, MVP, corrélations) + interprétation.
-            </p>
-            <div class="card-actions">
-              <a class="link" href="#" target="_blank" rel="noopener">Lire</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>Selenium : robustesse &amp; anti-fragile</h3>
-            <p class="card-desc">
-              Patterns : waits, retries, timeouts, selectors stables, logs, export, tests simples.
-            </p>
-            <div class="card-actions">
-              <a class="link" href="#" target="_blank" rel="noopener">Lire</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>ML : métriques et pièges</h3>
-            <p class="card-desc">
-              Baselines, leakage, AUC/PR, calibration, drift, jeux de données déséquilibrés.
-            </p>
-            <div class="card-actions">
-              <a class="link" href="#" target="_blank" rel="noopener">Lire</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section contact" id="contact">
-      <div class="container">
-        <div class="section-head">
-          <h2>Contact</h2>
-          <p class="muted">Réponse rapide. Remplace les placeholders.</p>
-        </div>
-
-        <div class="contact-grid">
-          <div class="panel">
-            <h3>Coordonnées</h3>
-            <div class="kv">
-              <div class="k">Email</div>
-              <div class="v"><a href="mailto:foufa.amine.30@gmail.com.tld">foufa.amine.30@gmail.com</a></div>
-
-              <div class="k">LinkedIn</div>
-              <div class="v"><a href="https://www.linkedin.com/in/amine-foufa-056a51210/" target="_blank" rel="noopener">https://www.linkedin.com/in/amine-foufa-056a51210/</a></div>
-
-              <div class="k">GitHub</div>
-              <div class="v"><a href="https://github.com/AmineF349" target="_blank" rel="noopener">https://github.com/AmineF349</a></div>
-            </div>
-            <div class="divider"></div>
-            <p class="fine">
-              Intérêts : data/ML appliqués à la finance, automatisation, systèmes propres et mesurables.
-            </p>
-          </div>
-
-          <form class="panel form" id="contactForm" autocomplete="on">
-            <h3>Message (local)</h3>
-            <p class="muted small">
-              Ce formulaire génère un email via ton client (pas de backend).
-            </p>
-
-            <label class="field">
-              <span>Nom</span>
-              <input name="name" type="text" placeholder="Votre nom" required />
-            </label>
-
-            <label class="field">
-              <span>Objet</span>
-              <input name="subject" type="text" placeholder="Entretien / mission / question" required />
-            </label>
-
-            <label class="field">
-              <span>Message</span>
-              <textarea name="message" rows="6" placeholder="Votre message…" required></textarea>
-            </label>
-
-            <button class="btn btn-primary" type="submit">Ouvrir email</button>
-            <div class="fine" id="formHint" role="status" aria-live="polite"></div>
-          </form>
-        </div>
-      </div>
+      <footer class="foot">
+        <span id="footLeft">Fait avec intention.</span>
+        <span id="footRight"></span>
+      </footer>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-row">
-      <div class="muted small">
-        © <span id="year"></span> Foufa Amine (MEng Student - Entrepreneur) Construit en HTML/CSS/JS.
-      </div>
-      <button class="btn btn-ghost" id="backToTop" type="button">Haut</button>
-    </div>
-  </footer>
+  <div class="burst" id="burst" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
