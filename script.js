@@ -1,222 +1,214 @@
-/* Personnalisation rapide */
-const CONFIG = {
-  toName: "Shana",
-  fromName: "Ton mari",
-  letter: [
-    "Je choisis encore toi, sans hésiter.",
-    "Ce soir, je veux te prendre par la main, ralentir, et te rappeler à quel point tu comptes.",
-    "Si tu dis oui : on se fait notre Saint-Valentin, à notre façon."
-  ].join("\n\n"),
-  yesSubtitle: "Décision validée. On passe au plan.",
-  noHints: [
-    "Erreur de saisie probable.",
-    "Relecture conseillée.",
-    "Dernière chance avant exécution du plan quand même."
-  ],
-};
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("script.js chargé");
 
-const els = {
-  subtitle: document.getElementById("subtitle"),
-  note: document.getElementById("note"),
-  yesBtn: document.getElementById("yesBtn"),
-  noBtn: document.getElementById("noBtn"),
-  cta: document.getElementById("cta"),
-  reveal: document.getElementById("reveal"),
-  letterBody: document.getElementById("letterBody"),
-  copyBtn: document.getElementById("copyBtn"),
-  replayBtn: document.getElementById("replayBtn"),
-  footRight: document.getElementById("footRight"),
-  hearts: document.getElementById("hearts"),
-  burst: document.getElementById("burst"),
-};
+  const CONFIG = {
+    toName: "Shana",
+    fromName: "Ton mari",
+    letter: [
+      "Je choisis encore toi, sans hésiter.",
+      "Ce soir, je veux te prendre par la main, ralentir, et te rappeler à quel point tu comptes.",
+      "Si tu dis oui : on se fait notre Saint-Valentin, à notre façon."
+    ].join("\n\n"),
+    yesSubtitle: "Décision validée. On passe au plan.",
+    noHints: [
+      "Erreur de saisie probable.",
+      "Relecture conseillée.",
+      "Dernière chance avant exécution du plan quand même."
+    ],
+  };
 
-let noCount = 0;
+  const $ = (id) => document.getElementById(id);
 
-init();
+  const els = {
+    subtitle: $("subtitle"),
+    note: $("note"),
+    yesBtn: $("yesBtn"),
+    noBtn: $("noBtn"),
+    cta: $("cta"),
+    reveal: $("reveal"),
+    letterBody: $("letterBody"),
+    copyBtn: $("copyBtn"),
+    replayBtn: $("replayBtn"),
+    footRight: $("footRight"),
+    hearts: $("hearts"),
+    burst: $("burst"),
+  };
 
-function init(){
+  // Si un seul élément clé manque, ton ancien script plantait ici.
+  if (!els.yesBtn || !els.noBtn || !els.subtitle) {
+    console.error("IDs manquants dans index.html :", {
+      yesBtn: !!els.yesBtn,
+      noBtn: !!els.noBtn,
+      subtitle: !!els.subtitle
+    });
+    return;
+  }
+
+  let noCount = 0;
+
   document.title = `${CONFIG.toName}, veux-tu être ma Valentine ?`;
-  els.footRight.textContent = `© ${new Date().getFullYear()}`;
+  if (els.footRight) els.footRight.textContent = `© ${new Date().getFullYear()}`;
 
-  // Inject the letter
-  els.letterBody.textContent = `${CONFIG.toName},\n\n${CONFIG.letter}\n\n— ${CONFIG.fromName}`;
+  if (els.letterBody) {
+    els.letterBody.textContent = `${CONFIG.toName},\n\n${CONFIG.letter}\n\n— ${CONFIG.fromName}`;
+  }
 
-  // Floating hearts background
   spawnFloatingHearts(28);
 
-  // Buttons
   els.yesBtn.addEventListener("click", onYes);
   els.noBtn.addEventListener("mouseenter", onNoHover);
   els.noBtn.addEventListener("click", onNoClick);
 
-  // Utilities
-  els.copyBtn.addEventListener("click", copyLetter);
-  els.replayBtn.addEventListener("click", replay);
-}
+  if (els.copyBtn) els.copyBtn.addEventListener("click", copyLetter);
+  if (els.replayBtn) els.replayBtn.addEventListener("click", replay);
 
-function spawnFloatingHearts(n){
-  const w = window.innerWidth;
-  const h = window.innerHeight;
+  window.addEventListener("resize", () => spawnFloatingHearts(28));
 
-  els.hearts.innerHTML = "";
-  for(let i=0;i<n;i++){
-    const heart = document.createElement("div");
-    heart.className = "heart";
+  function onYes() {
+    if (els.note) els.note.textContent = "";
+    els.subtitle.textContent = CONFIG.yesSubtitle;
 
-    const left = rand(0, w);
-    const delay = rand(0, 8);
-    const dur = rand(10, 20);
-    const size = rand(10, 22);
-    const drift = rand(-40, 40);
+    if (els.cta) els.cta.querySelectorAll("button").forEach(b => (b.disabled = true));
+    if (els.reveal) els.reveal.hidden = false;
 
-    heart.style.left = `${left}px`;
-    heart.style.top = `${rand(0, h)}px`;
-    heart.style.width = `${size}px`;
-    heart.style.height = `${size}px`;
-    heart.style.animationDelay = `${delay}s`;
-    heart.style.animationDuration = `${dur}s`;
-    heart.style.opacity = `${rand(0.12, 0.28)}`;
-    heart.style.filter = `hue-rotate(${rand(-10, 10)}deg)`;
-
-    // add gentle horizontal drift using CSS translate via custom property
-    heart.style.setProperty("--drift", `${drift}px`);
-    // Not used in keyframes directly; simulate by nudging left a bit every few hearts
-    heart.style.marginLeft = `${drift}px`;
-
-    els.hearts.appendChild(heart);
+    const rect = els.yesBtn.getBoundingClientRect();
+    burstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 34);
   }
-}
 
-function onYes(){
-  els.note.textContent = "";
-  els.subtitle.textContent = CONFIG.yesSubtitle;
+  function onNoHover() {
+    if (isMobile()) return;
 
-  els.cta.querySelectorAll("button").forEach(b => b.disabled = true);
+    const btn = els.noBtn;
+    const card = btn.closest(".card");
+    if (!card) return;
 
-  // Reveal letter
-  els.reveal.hidden = false;
+    const cardRect = card.getBoundingClientRect();
+    const pad = 18;
+    const maxX = cardRect.width - btn.offsetWidth - pad * 2;
+    const maxY = 120;
 
-  // Burst
-  const rect = els.yesBtn.getBoundingClientRect();
-  burstAt(rect.left + rect.width/2, rect.top + rect.height/2, 34);
+    const x = rand(pad, pad + Math.max(0, maxX));
+    const y = rand(0, maxY);
 
-  // Micro animation
-  els.yesBtn.style.transform = "translateY(-1px) scale(1.02)";
-  setTimeout(() => els.yesBtn.style.transform = "", 280);
-}
-
-function onNoHover(){
-  // Keep it tasteful: small evasive move, not impossible.
-  if (isMobile()) return;
-
-  const btn = els.noBtn;
-  const card = btn.closest(".card");
-  const cardRect = card.getBoundingClientRect();
-
-  const pad = 18;
-  const maxX = cardRect.width - btn.offsetWidth - pad * 2;
-  const maxY = 120;
-
-  const x = rand(pad, pad + Math.max(0, maxX));
-  const y = rand(0, maxY);
-
-  btn.style.position = "relative";
-  btn.style.left = `${x - (btn.offsetLeft || 0)}px`;
-  btn.style.top  = `${y - (btn.offsetTop || 0)}px`;
-}
-
-function onNoClick(){
-  noCount += 1;
-
-  const hint = CONFIG.noHints[Math.min(noCount - 1, CONFIG.noHints.length - 1)];
-  els.note.textContent = hint;
-
-  // small shake
-  els.noBtn.animate(
-    [
-      { transform: "translateX(0px)" },
-      { transform: "translateX(-6px)" },
-      { transform: "translateX(6px)" },
-      { transform: "translateX(-4px)" },
-      { transform: "translateX(4px)" },
-      { transform: "translateX(0px)" },
-    ],
-    { duration: 320, easing: "ease-out" }
-  );
-
-  // After a few "no", make "yes" visually more obvious
-  if(noCount >= 2){
-    els.yesBtn.style.boxShadow = "0 26px 70px rgba(255,59,122,.36)";
+    btn.style.position = "relative";
+    btn.style.left = `${x - (btn.offsetLeft || 0)}px`;
+    btn.style.top  = `${y - (btn.offsetTop || 0)}px`;
   }
-  if(noCount >= 3){
-    els.subtitle.textContent = "Je reformule : tu me rends heureux. On officialise ?";
-  }
-}
 
-function burstAt(x, y, count){
-  els.burst.innerHTML = "";
+  function onNoClick() {
+    noCount += 1;
 
-  for(let i=0;i<count;i++){
-    const p = document.createElement("div");
-    p.className = "particle";
+    if (els.note) {
+      const hint = CONFIG.noHints[Math.min(noCount - 1, CONFIG.noHints.length - 1)];
+      els.note.textContent = hint;
+    }
 
-    const angle = rand(0, Math.PI * 2);
-    const dist = rand(40, 220);
-    const dx = Math.cos(angle) * dist;
-    const dy = Math.sin(angle) * dist;
-
-    const size = rand(8, 14);
-    p.style.width = `${size}px`;
-    p.style.height = `${size}px`;
-    p.style.left = `${x}px`;
-    p.style.top = `${y}px`;
-
-    const delay = rand(0, 90);
-
-    els.burst.appendChild(p);
-
-    p.animate(
+    els.noBtn.animate(
       [
-        { transform: "translate(-50%, -50%) rotate(45deg) scale(.9)", opacity: 0 },
-        { transform: "translate(-50%, -50%) rotate(45deg) scale(1.0)", opacity: 1, offset: 0.12 },
-        { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(45deg) scale(.9)`, opacity: 0 }
+        { transform: "translateX(0px)" },
+        { transform: "translateX(-6px)" },
+        { transform: "translateX(6px)" },
+        { transform: "translateX(-4px)" },
+        { transform: "translateX(4px)" },
+        { transform: "translateX(0px)" },
       ],
-      { duration: rand(900, 1300), delay, easing: "cubic-bezier(.2,.8,.2,1)", fill: "forwards" }
+      { duration: 320, easing: "ease-out" }
     );
+
+    if (noCount >= 3) {
+      els.subtitle.textContent = "Je reformule : tu me rends heureux. On officialise ?";
+    }
   }
-}
 
-async function copyLetter(){
-  const text = els.letterBody.textContent;
-  try{
-    await navigator.clipboard.writeText(text);
-    els.note.textContent = "Message copié.";
-  }catch{
-    els.note.textContent = "Copie impossible. Sélectionne et copie manuellement.";
+  async function copyLetter() {
+    if (!els.letterBody) return;
+    const text = els.letterBody.textContent;
+    try {
+      await navigator.clipboard.writeText(text);
+      if (els.note) els.note.textContent = "Message copié.";
+    } catch {
+      if (els.note) els.note.textContent = "Copie impossible. Sélectionne et copie manuellement.";
+    }
   }
-}
 
-function replay(){
-  noCount = 0;
-  els.cta.querySelectorAll("button").forEach(b => {
-    b.disabled = false;
-    b.style.left = "";
-    b.style.top = "";
-  });
+  function replay() {
+    noCount = 0;
 
-  els.reveal.hidden = true;
-  els.subtitle.textContent = "J’ai un petit plan pour nous. Une seule question avant.";
-  els.note.textContent = "";
+    if (els.cta) {
+      els.cta.querySelectorAll("button").forEach(b => {
+        b.disabled = false;
+        b.style.left = "";
+        b.style.top = "";
+      });
+    }
 
-  spawnFloatingHearts(28);
-}
+    if (els.reveal) els.reveal.hidden = true;
+    els.subtitle.textContent = "J’ai un petit plan pour nous. Une seule question avant.";
+    if (els.note) els.note.textContent = "";
 
-function rand(min, max){
-  return Math.random() * (max - min) + min;
-}
+    spawnFloatingHearts(28);
+  }
 
-function isMobile(){
-  return matchMedia("(max-width: 520px)").matches || /Mobi|Android/i.test(navigator.userAgent);
-}
+  function spawnFloatingHearts(n) {
+    if (!els.hearts) return;
 
-window.addEventListener("resize", () => spawnFloatingHearts(28));
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    els.hearts.innerHTML = "";
+    for (let i = 0; i < n; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+
+      const left = rand(0, w);
+      const delay = rand(0, 8);
+      const dur = rand(10, 20);
+      const size = rand(10, 22);
+
+      heart.style.left = `${left}px`;
+      heart.style.top = `${rand(0, h)}px`;
+      heart.style.width = `${size}px`;
+      heart.style.height = `${size}px`;
+      heart.style.animationDelay = `${delay}s`;
+      heart.style.animationDuration = `${dur}s`;
+      heart.style.opacity = `${rand(0.12, 0.28)}`;
+
+      els.hearts.appendChild(heart);
+    }
+  }
+
+  function burstAt(x, y, count) {
+    if (!els.burst) return;
+    els.burst.innerHTML = "";
+
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement("div");
+      p.className = "particle";
+
+      const angle = rand(0, Math.PI * 2);
+      const dist = rand(40, 220);
+      const dx = Math.cos(angle) * dist;
+      const dy = Math.sin(angle) * dist;
+
+      const size = rand(8, 14);
+      p.style.width = `${size}px`;
+      p.style.height = `${size}px`;
+      p.style.left = `${x}px`;
+      p.style.top = `${y}px`;
+
+      els.burst.appendChild(p);
+
+      p.animate(
+        [
+          { transform: "translate(-50%, -50%) rotate(45deg) scale(.9)", opacity: 0 },
+          { transform: "translate(-50%, -50%) rotate(45deg) scale(1.0)", opacity: 1, offset: 0.12 },
+          { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(45deg) scale(.9)`, opacity: 0 }
+        ],
+        { duration: rand(900, 1300), delay: rand(0, 90), easing: "cubic-bezier(.2,.8,.2,1)", fill: "forwards" }
+      );
+    }
+  }
+
+  function rand(min, max) { return Math.random() * (max - min) + min; }
+  function isMobile() { return matchMedia("(max-width: 520px)").matches; }
+});
