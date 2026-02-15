@@ -1,214 +1,183 @@
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("script.js chargé");
+// script.js
+(() => {
+  const root = document.documentElement;
 
-  const CONFIG = {
-    toName: "Shana",
-    fromName: "Ton mari",
-    letter: [
-      "Je choisis encore toi, sans hésiter.",
-      "Ce soir, je veux te prendre par la main, ralentir, et te rappeler à quel point tu comptes.",
-      "Si tu dis oui : on se fait notre Saint-Valentin, à notre façon."
-    ].join("\n\n"),
-    yesSubtitle: "Décision validée. On passe au plan.",
-    noHints: [
-      "Erreur de saisie probable.",
-      "Relecture conseillée.",
-      "Dernière chance avant exécution du plan quand même."
-    ],
-  };
+  // ---------- Theme ----------
+  const THEME_KEY = "site-theme";
+  const themeToggle = document.getElementById("themeToggle");
 
-  const $ = (id) => document.getElementById(id);
+  function getPreferredTheme() {
+    const stored = localStorage.getItem(THEME_KEY);
+    if (stored === "light" || stored === "dark") return stored;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  }
 
-  const els = {
-    subtitle: $("subtitle"),
-    note: $("note"),
-    yesBtn: $("yesBtn"),
-    noBtn: $("noBtn"),
-    cta: $("cta"),
-    reveal: $("reveal"),
-    letterBody: $("letterBody"),
-    copyBtn: $("copyBtn"),
-    replayBtn: $("replayBtn"),
-    footRight: $("footRight"),
-    hearts: $("hearts"),
-    burst: $("burst"),
-  };
+  function applyTheme(theme) {
+    root.dataset.theme = theme;
+    localStorage.setItem(THEME_KEY, theme);
+    if (themeToggle) themeToggle.setAttribute("aria-label", `Basculer thème (actuel: ${theme})`);
+  }
 
-  // Si un seul élément clé manque, ton ancien script plantait ici.
-  if (!els.yesBtn || !els.noBtn || !els.subtitle) {
-    console.error("IDs manquants dans index.html :", {
-      yesBtn: !!els.yesBtn,
-      noBtn: !!els.noBtn,
-      subtitle: !!els.subtitle
+  applyTheme(getPreferredTheme());
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const next = root.dataset.theme === "light" ? "dark" : "light";
+      applyTheme(next);
     });
-    return;
   }
 
-  let noCount = 0;
+  // ---------- Active nav ----------
+  const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+  const sections = navLinks
+    .map(a => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
 
-  document.title = `${CONFIG.toName}, veux-tu être ma Valentine ?`;
-  if (els.footRight) els.footRight.textContent = `© ${new Date().getFullYear()}`;
+  const ioNav = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter(e => e.isIntersecting)
+      .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
 
-  if (els.letterBody) {
-    els.letterBody.textContent = `${CONFIG.toName},\n\n${CONFIG.letter}\n\n— ${CONFIG.fromName}`;
+    const id = "#" + visible.target.id;
+    navLinks.forEach(a => a.classList.toggle("is-active", a.getAttribute("href") === id));
+  }, { rootMargin: "-20% 0px -70% 0px", threshold: [0.08, 0.15, 0.25] });
+
+  sections.forEach(sec => ioNav.observe(sec));
+
+  // ---------- Reveal on scroll ----------
+  const revealEls = Array.from(document.querySelectorAll(".card, .panel, .tl-body, .metric, .hero-card"));
+  revealEls.forEach(el => el.classList.add("reveal"));
+
+  const ioReveal = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add("is-visible");
+        ioReveal.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(el => ioReveal.observe(el));
+
+  // ---------- Projects filtering ----------
+  const pills = Array.from(document.querySelectorAll(".pill"));
+  const search = document.getElementById("projectSearch");
+  const grid = document.getElementById("projectsGrid");
+  const emptyState = document.getElementById("emptyState");
+
+  function normalize(s) {
+    return (s || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/\p{Diacritic}/gu, "");
   }
 
-  spawnFloatingHearts(28);
-
-  els.yesBtn.addEventListener("click", onYes);
-  els.noBtn.addEventListener("mouseenter", onNoHover);
-  els.noBtn.addEventListener("click", onNoClick);
-
-  if (els.copyBtn) els.copyBtn.addEventListener("click", copyLetter);
-  if (els.replayBtn) els.replayBtn.addEventListener("click", replay);
-
-  window.addEventListener("resize", () => spawnFloatingHearts(28));
-
-  function onYes() {
-    if (els.note) els.note.textContent = "";
-    els.subtitle.textContent = CONFIG.yesSubtitle;
-
-    if (els.cta) els.cta.querySelectorAll("button").forEach(b => (b.disabled = true));
-    if (els.reveal) els.reveal.hidden = false;
-
-    const rect = els.yesBtn.getBoundingClientRect();
-    burstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 34);
+  function getActiveFilter() {
+    const active = pills.find(p => p.classList.contains("is-active"));
+    return active ? active.dataset.filter : "all";
   }
 
-  function onNoHover() {
-    if (isMobile()) return;
+  function applyProjectsFilter() {
+    const filter = getActiveFilter();
+    const q = normalize(search ? search.value : "");
 
-    const btn = els.noBtn;
-    const card = btn.closest(".card");
-    if (!card) return;
+    const projects = Array.from(document.querySelectorAll(".project"));
+    let shown = 0;
 
-    const cardRect = card.getBoundingClientRect();
-    const pad = 18;
-    const maxX = cardRect.width - btn.offsetWidth - pad * 2;
-    const maxY = 120;
+    projects.forEach(card => {
+      const tags = (card.dataset.tags || "").split(",").map(t => t.trim());
+      const title = normalize(card.dataset.title || card.querySelector("h3")?.textContent || "");
+      const text = normalize(card.textContent || "");
 
-    const x = rand(pad, pad + Math.max(0, maxX));
-    const y = rand(0, maxY);
+      const matchesFilter = (filter === "all") ? true : tags.includes(filter);
+      const matchesSearch = q.length === 0 ? true : (title.includes(q) || text.includes(q));
 
-    btn.style.position = "relative";
-    btn.style.left = `${x - (btn.offsetLeft || 0)}px`;
-    btn.style.top  = `${y - (btn.offsetTop || 0)}px`;
+      const show = matchesFilter && matchesSearch;
+      card.hidden = !show;
+      if (show) shown += 1;
+    });
+
+    if (emptyState) emptyState.hidden = shown !== 0;
   }
 
-  function onNoClick() {
-    noCount += 1;
+  pills.forEach(p => {
+    p.addEventListener("click", () => {
+      pills.forEach(x => x.classList.remove("is-active"));
+      p.classList.add("is-active");
+      applyProjectsFilter();
+    });
+  });
 
-    if (els.note) {
-      const hint = CONFIG.noHints[Math.min(noCount - 1, CONFIG.noHints.length - 1)];
-      els.note.textContent = hint;
-    }
+  if (search) search.addEventListener("input", applyProjectsFilter);
+  applyProjectsFilter();
 
-    els.noBtn.animate(
-      [
-        { transform: "translateX(0px)" },
-        { transform: "translateX(-6px)" },
-        { transform: "translateX(6px)" },
-        { transform: "translateX(-4px)" },
-        { transform: "translateX(4px)" },
-        { transform: "translateX(0px)" },
-      ],
-      { duration: 320, easing: "ease-out" }
-    );
+  // ---------- Copy email ----------
+  const copyEmailBtn = document.getElementById("copyEmailBtn");
+  if (copyEmailBtn) {
+    copyEmailBtn.addEventListener("click", async () => {
+      const email = copyEmailBtn.dataset.email || "";
+      if (!email) return;
 
-    if (noCount >= 3) {
-      els.subtitle.textContent = "Je reformule : tu me rends heureux. On officialise ?";
-    }
+      try {
+        await navigator.clipboard.writeText(email);
+        copyEmailBtn.textContent = "Email copié";
+        setTimeout(() => (copyEmailBtn.textContent = "Copier email"), 1200);
+      } catch {
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = email;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        copyEmailBtn.textContent = "Email copié";
+        setTimeout(() => (copyEmailBtn.textContent = "Copier email"), 1200);
+      }
+    });
   }
 
-  async function copyLetter() {
-    if (!els.letterBody) return;
-    const text = els.letterBody.textContent;
-    try {
-      await navigator.clipboard.writeText(text);
-      if (els.note) els.note.textContent = "Message copié.";
-    } catch {
-      if (els.note) els.note.textContent = "Copie impossible. Sélectionne et copie manuellement.";
-    }
+  // ---------- Contact form (mailto) ----------
+  const form = document.getElementById("contactForm");
+  const hint = document.getElementById("formHint");
+  const DEST_EMAIL = "votre.email@domaine.tld";
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const fd = new FormData(form);
+      const name = String(fd.get("name") || "").trim();
+      const subject = String(fd.get("subject") || "").trim();
+      const message = String(fd.get("message") || "").trim();
+
+      if (!name || !subject || !message) {
+        if (hint) hint.textContent = "Champs manquants.";
+        return;
+      }
+
+      const body = [
+        `Nom: ${name}`,
+        "",
+        message,
+        "",
+        "--",
+        "Envoyé depuis le site"
+      ].join("\n");
+
+      const url = `mailto:${encodeURIComponent(DEST_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = url;
+
+      if (hint) hint.textContent = "Ouverture de ton client email…";
+    });
   }
 
-  function replay() {
-    noCount = 0;
+  // ---------- Footer year + back to top ----------
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-    if (els.cta) {
-      els.cta.querySelectorAll("button").forEach(b => {
-        b.disabled = false;
-        b.style.left = "";
-        b.style.top = "";
-      });
-    }
-
-    if (els.reveal) els.reveal.hidden = true;
-    els.subtitle.textContent = "J’ai un petit plan pour nous. Une seule question avant.";
-    if (els.note) els.note.textContent = "";
-
-    spawnFloatingHearts(28);
+  const backToTop = document.getElementById("backToTop");
+  if (backToTop) {
+    backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   }
-
-  function spawnFloatingHearts(n) {
-    if (!els.hearts) return;
-
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-
-    els.hearts.innerHTML = "";
-    for (let i = 0; i < n; i++) {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-
-      const left = rand(0, w);
-      const delay = rand(0, 8);
-      const dur = rand(10, 20);
-      const size = rand(10, 22);
-
-      heart.style.left = `${left}px`;
-      heart.style.top = `${rand(0, h)}px`;
-      heart.style.width = `${size}px`;
-      heart.style.height = `${size}px`;
-      heart.style.animationDelay = `${delay}s`;
-      heart.style.animationDuration = `${dur}s`;
-      heart.style.opacity = `${rand(0.12, 0.28)}`;
-
-      els.hearts.appendChild(heart);
-    }
-  }
-
-  function burstAt(x, y, count) {
-    if (!els.burst) return;
-    els.burst.innerHTML = "";
-
-    for (let i = 0; i < count; i++) {
-      const p = document.createElement("div");
-      p.className = "particle";
-
-      const angle = rand(0, Math.PI * 2);
-      const dist = rand(40, 220);
-      const dx = Math.cos(angle) * dist;
-      const dy = Math.sin(angle) * dist;
-
-      const size = rand(8, 14);
-      p.style.width = `${size}px`;
-      p.style.height = `${size}px`;
-      p.style.left = `${x}px`;
-      p.style.top = `${y}px`;
-
-      els.burst.appendChild(p);
-
-      p.animate(
-        [
-          { transform: "translate(-50%, -50%) rotate(45deg) scale(.9)", opacity: 0 },
-          { transform: "translate(-50%, -50%) rotate(45deg) scale(1.0)", opacity: 1, offset: 0.12 },
-          { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(45deg) scale(.9)`, opacity: 0 }
-        ],
-        { duration: rand(900, 1300), delay: rand(0, 90), easing: "cubic-bezier(.2,.8,.2,1)", fill: "forwards" }
-      );
-    }
-  }
-
-  function rand(min, max) { return Math.random() * (max - min) + min; }
-  function isMobile() { return matchMedia("(max-width: 520px)").matches; }
-});
+})();
